@@ -2,12 +2,12 @@
 
 import Link from "next/link"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { GraduationCap, Building2, ArrowRight } from "lucide-react"
+import { GraduationCap, Building2, Shield, ArrowRight } from "lucide-react"
 
 export default function LoginPage() {
   return (
     <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background to-muted/30 px-4">
-      <div className="w-full max-w-4xl">
+      <div className="w-full max-w-6xl">
         {/* Header */}
         <div className="text-center mb-12 animate-in fade-in slide-in-from-bottom-4 duration-1000">
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-balance">Welcome to SkillChain</h1>
@@ -17,7 +17,7 @@ export default function LoginPage() {
         </div>
 
         {/* Role Selection */}
-        <div className="grid md:grid-cols-2 gap-6 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200">
+        <div className="grid md:grid-cols-3 gap-6 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200">
           {/* Student Card */}
           <Link href="/login/student">
             <Card className="h-full hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all cursor-pointer group">
@@ -60,6 +60,29 @@ export default function LoginPage() {
                   authenticity on the blockchain.
                 </p>
                 <div className="flex items-center text-accent text-sm font-medium group-hover:translate-x-1 transition-transform">
+                  Sign In <ArrowRight className="h-4 w-4 ml-2" />
+                </div>
+              </CardContent>
+            </Card>
+          </Link>
+
+          {/* Admin Card */}
+          <Link href="/login/admin">
+            <Card className="h-full hover:border-destructive/50 hover:shadow-lg hover:shadow-destructive/10 transition-all cursor-pointer group">
+              <CardHeader>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="p-3 rounded-lg bg-destructive/10 group-hover:bg-destructive/20 transition-colors">
+                    <Shield className="h-8 w-8 text-destructive" />
+                  </div>
+                  <CardTitle>Admin</CardTitle>
+                </div>
+                <CardDescription>Monitor and manage system-wide operations</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <p className="text-sm text-muted-foreground">
+                  Oversee institute registrations, verify issued certificates, and ensure blockchain data integrity.
+                </p>
+                <div className="flex items-center text-destructive text-sm font-medium group-hover:translate-x-1 transition-transform">
                   Sign In <ArrowRight className="h-4 w-4 ml-2" />
                 </div>
               </CardContent>
