@@ -18,10 +18,10 @@ export function Navigation() {
   const isActive = (path: string) => pathname === path || pathname.startsWith(path)
 
   const navigationItems = [
-    { label: "Issue", path: "/issue" },
+    // { label: "Issue", path: "/issue" },
     { label: "Verify", path: "/verify" },
-    { label: "My Certificates", path: "/student" },
-    { label: "Admin", path: "/admin" },
+    // { label: "My Certificates", path: "/student" },
+    // { label: "Admin", path: "/admin" },
     { label: "Login", path: "/login" },
   ]
 
