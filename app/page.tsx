@@ -25,7 +25,7 @@ export default function HomePage() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200">
-              <Link href="/issue">
+              <Link href="/login/institute">
                 <Button size="lg" className="gap-2 bg-primary hover:bg-primary/90">
                   Issue Certificate
                   <ArrowRight className="h-4 w-4" />

@@ -27,7 +27,7 @@ export default function StudentLoginPage() {
 
       if (email && password) {
         // Redirect to student dashboard
-        window.location.href = "/student"
+        window.location.href = "/login/otp"
       } else {
         setError("Please fill in all fields")
       }
