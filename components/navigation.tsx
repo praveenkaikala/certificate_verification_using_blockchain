@@ -36,7 +36,7 @@ export function Navigation() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 font-bold text-xl hover:opacity-80 transition-opacity">
             <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg"></div>
-            <span className="hidden sm:inline">SkillChain</span>
+            <span className="hidden sm:inline">ForgeryShield</span>
           </Link>
 
           {/* Desktop Navigation */}
