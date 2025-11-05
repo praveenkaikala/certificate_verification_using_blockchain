@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Loader2, Mail, Lock } from "lucide-react"
+import { useRouter } from "next/navigation"
 
 export default function OTPAuthPage() {
   const [step, setStep] = useState<"enter" | "verify">("verify")
@@ -13,7 +14,7 @@ export default function OTPAuthPage() {
   const [otp, setOtp] = useState(["", "", "", "", "", ""])
   const [loading, setLoading] = useState(false)
   const inputRefs = useRef<(HTMLInputElement | null)[]>([])
-
+    const router=useRouter()
   // Send OTP simulation
   const handleSendOTP = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -57,7 +58,8 @@ export default function OTPAuthPage() {
     setLoading(true)
     setTimeout(() => {
       setLoading(false)
-     window.location.href='/student'
+      localStorage.setItem("islogin","true")
+     router.push('/student')
     }, 1500)
   }
 

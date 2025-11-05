@@ -12,11 +12,15 @@ export function Navigation() {
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-
+  const [islogin,setIsLogin]=useState(false)
   useEffect(() => setMounted(true), [])
-
+  useEffect(()=>{
+    setIsLogin((prev)=>localStorage.getItem("islogin")==="true" || false)
+  },[pathname])
+  useEffect(()=>{
+    console.log(islogin)
+  },[pathname])
   const isActive = (path: string) => pathname === path || pathname.startsWith(path)
-
   const navigationItems = [
     // { label: "Issue", path: "/issue" },
     { label: "Verify", path: "/verify" },
@@ -45,7 +49,8 @@ export function Navigation() {
                   isActive(item.path)
                     ? "bg-primary text-primary-foreground"
                     : "text-muted-foreground hover:text-foreground"
-                }`}
+                } ${ islogin && item.label=="Login" && " hidden"
+                    }`}
               >
                 {item.label}
               </Link>
