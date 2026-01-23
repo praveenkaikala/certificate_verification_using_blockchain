@@ -1,19 +1,16 @@
 "use client"
 import { Card } from "@/components/ui/card"
 import { CertificateVerifier } from "@/components/dashboard/certificate-verifier"
+import Heading from "@/components/styles/Heading"
 
 export default function VerifyPage() {
   return (
     <main className="min-h-screen bg-background">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
         {/* Hero Section */}
-        <div className="text-center mb-12">
-          <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-4">Verify Certificates</h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Instantly verify blockchain-issued certificates. Search by certificate ID, blockchain ID, or recipient email
-            to confirm authenticity.
-          </p>
-        </div>
+        <Heading title="Verify Certificates" description=" Instantly verify blockchain-issued certificates. Search by certificate ID, blockchain ID, or recipient email
+            to confirm authenticity."/>
+       
 
         {/* Main Verification Component */}
         <CertificateVerifier />
