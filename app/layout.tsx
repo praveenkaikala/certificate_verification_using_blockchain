@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import { Navigation } from "@/components/navigation"
 import { ThemeProvider } from "@/components/theme-provider"
+import ScrollToTop from "@/components/ScrollToTop"
 
 const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
@@ -27,7 +28,10 @@ export default function RootLayout({
       <body >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem storageKey="skillchain-theme">
           <Navigation />
+          <ScrollToTop>
+
           {children}
+          </ScrollToTop>
         </ThemeProvider>
         <Analytics />
       </body>
