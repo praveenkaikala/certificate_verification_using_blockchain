@@ -12,7 +12,7 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center text-center gap-8">
             <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-1000">
-              <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-balance">
+              <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-balance">
                 Verify Skills Instantly with{" "}
                 <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                   Blockchain
