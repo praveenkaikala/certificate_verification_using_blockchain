@@ -27,6 +27,7 @@ export function Navigation() {
     // { label: "My Certificates", path: "/student" },
     // { label: "Admin", path: "/admin" },
     { label: "Login", path: "/login" },
+     { label: "Register", path: "/register" },
   ]
 
   return (
