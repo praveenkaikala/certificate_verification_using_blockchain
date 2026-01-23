@@ -3,24 +3,24 @@
 import Link from "next/link"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { GraduationCap, Building2, Shield, ArrowRight } from "lucide-react"
+import Heading from "@/components/styles/Heading"
+
 
 export default function LoginPage() {
   return (
     <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background to-muted/30 px-4">
       <div className="w-full max-w-6xl">
         {/* Header */}
-        <div className="text-center mb-12 animate-in fade-in slide-in-from-bottom-4 duration-1000">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-balance">Welcome to SkillChain</h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-balance">
-            Choose your role to access your account and manage certificates on the blockchain.
-          </p>
-        </div>
+      
+        <Heading title="Welcome to SkillChain" description="Choose your role to access your account and manage certificates on the blockchain."/>
+
+       
 
         {/* Role Selection */}
         <div className="grid md:grid-cols-3 gap-6 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200">
           {/* Student Card */}
-          <Link href="/login/student">
-            <Card className="h-full hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all cursor-pointer group">
+          <Link href="/login/student" className="">
+            <Card className="h-full hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all cursor-pointer group py-3">
               <CardHeader>
                 <div className="flex items-center gap-3 mb-4">
                   <div className="p-3 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
@@ -44,8 +44,8 @@ export default function LoginPage() {
 
           {/* Institute Card */}
           <Link href="/login/institute">
-            <Card className="h-full hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10 transition-all cursor-pointer group">
-              <CardHeader>
+            <Card className="h-full flex flex-col hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10 transition-all cursor-pointer group py-3">
+              <CardHeader className="flex-1">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="p-3 rounded-lg bg-accent/10 group-hover:bg-accent/20 transition-colors">
                     <Building2 className="h-8 w-8 text-accent" />
@@ -68,8 +68,8 @@ export default function LoginPage() {
 
           {/* Admin Card */}
           <Link href="/login/admin">
-            <Card className="h-full hover:border-destructive/50 hover:shadow-lg hover:shadow-destructive/10 transition-all cursor-pointer group">
-              <CardHeader>
+            <Card className="h-full flex flex-col hover:border-destructive/50 hover:shadow-lg hover:shadow-destructive/10 transition-all cursor-pointer group py-3">
+              <CardHeader className="flex-1">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="p-3 rounded-lg bg-destructive/10 group-hover:bg-destructive/20 transition-colors">
                     <Shield className="h-8 w-8 text-destructive" />
