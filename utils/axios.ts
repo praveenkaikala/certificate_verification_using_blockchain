@@ -1,20 +1,20 @@
 import axios from "axios";
 import { backend_url } from "./publicUrls";
 
-const api = axios.create({
+const axiosApi:any= axios.create({
   baseURL: backend_url,
   withCredentials:true
 });
 
-api.interceptors.request.use(
-  (config) => {
+axiosApi.interceptors.request.use(
+  (config:any) => {
     const token = localStorage.getItem("token");
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },
-  (error) => Promise.reject(error)
+  (error:any) => Promise.reject(error)
 );
 
-export default api;
+export default axiosApi;

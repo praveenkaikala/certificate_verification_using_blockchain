@@ -9,25 +9,27 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { ArrowLeft, Mail, Lock, Loader2 } from "lucide-react"
+import axiosApi from "@/utils/axios"
+import { endPoints } from "@/utils/publicUrls"
+import { useRouter } from "next/navigation"
 
 export default function StudentLoginPage() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
-
+ const router=useRouter()
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError("")
     setIsLoading(true)
-
     try {
-      // Simulate authentication
-      await new Promise((resolve) => setTimeout(resolve, 1500))
-
       if (email && password) {
-        // Redirect to student dashboard
-        window.location.href = "/login/otp"
+        const resp=await axiosApi({
+          ...endPoints.auth.adminLogin,
+          data:{email,password}
+        })
+        router.push("otp")
       } else {
         setError("Please fill in all fields")
       }

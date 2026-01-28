@@ -9,6 +9,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { ArrowLeft, Mail, Lock, Loader2, Building2 } from "lucide-react"
+import axiosApi from "@/utils/axios"
+import { endPoints } from "@/utils/publicUrls"
+import { useRouter } from "next/navigation"
 
 export default function InstituteLoginPage() {
   const [email, setEmail] = useState("")
@@ -16,19 +19,18 @@ export default function InstituteLoginPage() {
   const [walletAddress, setWalletAddress] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
-
+ const router=useRouter()
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError("")
     setIsLoading(true)
-
     try {
-      // Simulate authentication
-      await new Promise((resolve) => setTimeout(resolve, 1500))
-
       if (email && password) {
-        // Redirect to institute dashboard
-        window.location.href = "/issue"
+        const resp=await axiosApi({
+          ...endPoints.auth.adminLogin,
+          data:{email,password}
+        })
+        router.push("otp")
       } else {
         setError("Please fill in all required fields")
       }

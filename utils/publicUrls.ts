@@ -1,6 +1,65 @@
-export const backend_url="https://certificate-verification-backend.vercel.app/api/v1/"
+export const backend_url:string="https://certificate-verification-backend.vercel.app/api/v1/"
+type HttpMethod = "get" | "post" | "put" | "delete";
 
-export const endPoints = {
+interface StaticBody {
+  method: HttpMethod;
+  url: string;
+}
+
+interface DynamicBody {
+  method: HttpMethod;
+  url: (id: string) => string;
+}
+
+type Body = StaticBody | DynamicBody;
+interface Auth {
+  adminLogin: StaticBody;
+  instituteLogin: StaticBody;
+  studentLogin: StaticBody;
+  studentRegister: StaticBody;
+  instituteRegister: StaticBody;
+  verifyOtp: StaticBody;
+}
+interface Admin {
+  getInstitutes: StaticBody;
+  getInstituteById: DynamicBody;
+  verifyInstitute: DynamicBody;
+  deleteInstitute: DynamicBody;
+}
+interface InstituteStudents {
+  getAll: StaticBody;
+  getById: DynamicBody;
+  verify: DynamicBody;
+  remove: DynamicBody;
+}
+
+interface InstituteCertificates {
+  issue: StaticBody;
+  getIssued: StaticBody;
+}
+
+interface Institute {
+  students: InstituteStudents;
+  certificates: InstituteCertificates;
+}
+
+
+interface StudentCertificates {
+  getAll: StaticBody;
+  getById: DynamicBody;
+}
+
+interface Student {
+  stats: StaticBody;
+  certificates: StudentCertificates;
+}
+export interface EndPoints {
+  auth: Auth;
+  admin: Admin;
+  institute: Institute;
+  student: Student;
+}
+export const endPoints: EndPoints = {
   auth: {
     adminLogin: {
       method: "post",
@@ -35,17 +94,17 @@ export const endPoints = {
     },
     getInstituteById: {
       method: "get",
-      url: (instituteId) =>
+      url: (instituteId: string) =>
         `admin/institutes/${instituteId}`,
     },
     verifyInstitute: {
       method: "put",
-      url: (instituteId) =>
+      url: (instituteId: string) =>
         `admin/institutes/${instituteId}/verify`,
     },
     deleteInstitute: {
       method: "delete",
-      url: (instituteId) =>
+      url: (instituteId: string) =>
         `admin/institutes/${instituteId}`,
     },
   },
@@ -58,21 +117,20 @@ export const endPoints = {
       },
       getById: {
         method: "get",
-        url: (studentId) =>
+        url: (studentId: string) =>
           `institute/students/${studentId}`,
       },
       verify: {
         method: "put",
-        url: (studentId) =>
+        url: (studentId: string) =>
           `institute/students/${studentId}/verify`,
       },
       remove: {
         method: "delete",
-        url: (studentId) =>
+        url: (studentId: string) =>
           `institute/students/${studentId}`,
       },
     },
-
     certificates: {
       issue: {
         method: "post",
@@ -97,7 +155,7 @@ export const endPoints = {
       },
       getById: {
         method: "get",
-        url: (certificateId) =>
+        url: (certificateId: string) =>
           `student/certificates/${certificateId}`,
       },
     },
