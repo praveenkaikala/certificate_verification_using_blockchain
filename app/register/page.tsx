@@ -16,8 +16,7 @@ export default function RegisterPage() {
         {/* Role Selection */}
         <div className="grid md:grid-cols-2 gap-6 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200">
           {/* Student Card */}
-           <Link
-              href="/signup/student">
+           <div>
             <Card className="max-w-xl mx-auto hover:shadow-lg transition-all animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200 py-3">
           <CardHeader>
             <div className="flex items-center gap-3 mb-4">
@@ -37,12 +36,13 @@ export default function RegisterPage() {
               Sign up using your institutional details to securely access certificates stored on the blockchain.
             </p>
 
-            <p
+            <Link
+              href="/register/student"
              
               className="flex items-center justify-center gap-2 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground font-medium hover:bg-primary/90 transition-colors"
             >
               Continue to Signup <ArrowRight className="h-4 w-4" />
-            </p>
+            </Link>
 
             <p className="text-sm text-center text-muted-foreground">
               Already registered?{" "}
@@ -52,11 +52,10 @@ export default function RegisterPage() {
             </p>
           </CardContent>
         </Card>
-          </Link>
+          </div>
 
           {/* Institute Card */}
-           <Link
-              href="/signup/institute"
+           <div
               
             >
                   <Card className="max-w-xl mx-auto hover:shadow-lg transition-all animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200 py-3">
@@ -77,12 +76,13 @@ export default function RegisterPage() {
               Submit your institutional details for admin verification before issuing certificates on SkillChain.
             </p>
 
-            <p
+            <Link
+              href="/register/institute"
              
               className="flex items-center justify-center gap-2 w-full rounded-md bg-accent px-4 py-2 text-accent-foreground font-medium hover:bg-accent/90 transition-colors"
             >
               Continue to Signup <ArrowRight className="h-4 w-4" />
-            </p>
+            </Link>
 
             <p className="text-sm text-center text-muted-foreground">
               Already registered?{" "}
@@ -93,7 +93,7 @@ export default function RegisterPage() {
           </CardContent>
         </Card>
 
-          </Link>
+          </div>
 
           {/* Admin Card */}
           

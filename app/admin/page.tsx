@@ -18,7 +18,7 @@ export default function AdminPage() {
         </div>
 
         {/* Platform Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
           <Card className="bg-card border-border p-4 hover:border-primary/50 transition-colors">
             <p className="text-muted-foreground text-xs mb-1">Total Certificates</p>
             <p className="text-3xl font-bold">12,847</p>
@@ -34,11 +34,11 @@ export default function AdminPage() {
             <p className="text-3xl font-bold">28,392</p>
             <p className="text-xs text-green-500 mt-1">+5.2% growth</p>
           </Card>
-          <Card className="bg-card border-border p-4 hover:border-primary/50 transition-colors">
+          {/* <Card className="bg-card border-border p-4 hover:border-primary/50 transition-colors">
             <p className="text-muted-foreground text-xs mb-1">Verification Rate</p>
             <p className="text-3xl font-bold">98.7%</p>
             <p className="text-xs text-green-500 mt-1">Excellent</p>
-          </Card>
+          </Card> */}
           <Card className="bg-card border-border p-4 hover:border-primary/50 transition-colors">
             <p className="text-muted-foreground text-xs mb-1">System Health</p>
             <p className="text-3xl font-bold text-green-500">Healthy</p>
