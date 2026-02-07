@@ -3,6 +3,7 @@
 import type React from "react";
 import { useState } from "react";
 import Link from "next/link";
+import axios from "axios";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -14,15 +15,62 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ArrowLeft, Mail, Lock, Building2, Loader2 } from "lucide-react";
+import axiosApi from "@/utils/axios";
+import { endPoints } from "@/utils/publicUrls";
+import { useRouter } from "next/navigation";
 
 export default function InstituteRegisterPage() {
   const [isLoading, setIsLoading] = useState(false);
+  const router=useRouter()
+  // ✅ form state
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    registrationNumber: "",
+    password: "",
+    walletAddress: "",
+  });
 
+  // ✅ handle input change
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // ✅ submit logic
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    await new Promise((r) => setTimeout(r, 1500));
-    setIsLoading(false);
+
+    try {
+      const res = await axiosApi(
+        {
+          ...endPoints.auth.instituteRegister,
+          data: {
+             name: formData.name,
+             email: formData.email,
+             reg_no: formData.registrationNumber,
+             password: formData.password,
+             address:"",
+             phone:"",
+             walletAddress: formData.walletAddress,
+           },
+        }
+      
+       
+      );
+
+      console.log("Success:", res.data);
+      router.push("/")
+    } catch (error: any) {
+      console.error(error);
+      alert(
+        error.response?.data?.message ||
+          "Registration failed. Please try again."
+      );
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -51,23 +99,44 @@ export default function InstituteRegisterPage() {
                 <Label>Institute Name</Label>
                 <div className="relative">
                   <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <Input placeholder="ABC Institute of Technology" className="pl-10" required />
+                  <Input
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="ABC Institute of Technology"
+                    className="pl-10"
+                    required
+                  />
                 </div>
               </div>
 
-              {/* Official Email */}
+              {/* Email */}
               <div className="space-y-2">
                 <Label>Official Email</Label>
                 <div className="relative">
                   <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <Input type="email" placeholder="admin@institute.edu" className="pl-10" required />
+                  <Input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="admin@institute.edu"
+                    className="pl-10"
+                    required
+                  />
                 </div>
               </div>
 
               {/* Registration Number */}
               <div className="space-y-2">
                 <Label>Institute Registration Number</Label>
-                <Input placeholder="INST-REG-2026" required />
+                <Input
+                  name="registrationNumber"
+                  value={formData.registrationNumber}
+                  onChange={handleChange}
+                  placeholder="INST-REG-2026"
+                  required
+                />
               </div>
 
               {/* Password */}
@@ -75,17 +144,35 @@ export default function InstituteRegisterPage() {
                 <Label>Password</Label>
                 <div className="relative">
                   <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <Input type="password" placeholder="••••••••" className="pl-10" required />
+                  <Input
+                    type="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    placeholder="••••••••"
+                    className="pl-10"
+                    required
+                  />
                 </div>
               </div>
 
               {/* Wallet */}
               <div className="space-y-2">
                 <Label>Institute Wallet Address</Label>
-                <Input placeholder="0xDEF456..." required />
+                <Input
+                  name="walletAddress"
+                  value={formData.walletAddress}
+                  onChange={handleChange}
+                  placeholder="0xDEF456..."
+                  required
+                />
               </div>
 
-              <Button className="w-full bg-gradient-to-r from-primary to-accent" disabled={isLoading}>
+              <Button
+                type="submit"
+                className="w-full bg-gradient-to-r from-primary to-accent"
+                disabled={isLoading}
+              >
                 {isLoading ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -99,7 +186,10 @@ export default function InstituteRegisterPage() {
 
             <p className="text-center text-sm text-muted-foreground">
               Already approved?{" "}
-              <Link href="/login/institute" className="text-primary font-medium hover:underline">
+              <Link
+                href="/login/institute"
+                className="text-primary font-medium hover:underline"
+              >
                 Sign in
               </Link>
             </p>

@@ -3,6 +3,7 @@
 import type React from "react";
 import { useState } from "react";
 import Link from "next/link";
+import axios from "axios";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -14,15 +15,59 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ArrowLeft, Mail, Lock, User, GraduationCap, Loader2 } from "lucide-react";
+import axiosApi from "@/utils/axios";
+import { endPoints } from "@/utils/publicUrls";
+import { useRouter } from "next/navigation";
 
 export default function StudentRegisterPage() {
   const [isLoading, setIsLoading] = useState(false);
 
+  // ✅ form state
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    rollNumber: "",
+    password: "",
+    walletAddress: "",
+  });
+const router=useRouter()
+  // ✅ handle input change
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // ✅ submit logic
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    await new Promise((r) => setTimeout(r, 1500));
-    setIsLoading(false);
+
+    try {
+      const res = await axiosApi(
+      {
+        ...endPoints.auth.studentRegister,
+        data:{
+          name: formData.fullName,
+          email: formData.email,
+          phone:"1234",
+          instituteId:"6976e2be2a0977e1b5cecc4c",
+          reg_no: formData.rollNumber,
+          password: formData.password,
+          walletAddress: formData.walletAddress || undefined,
+        },
+      }
+      );
+
+     router.push("/")
+    } catch (error: any) {
+      console.error(error);
+      alert(
+        error.response?.data?.message ||
+          "Registration failed. Please try again."
+      );
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -51,7 +96,14 @@ export default function StudentRegisterPage() {
                 <Label>Full Name</Label>
                 <div className="relative">
                   <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <Input placeholder="John Doe" className="pl-10" required />
+                  <Input
+                    name="fullName"
+                    value={formData.fullName}
+                    onChange={handleChange}
+                    placeholder="John Doe"
+                    className="pl-10"
+                    required
+                  />
                 </div>
               </div>
 
@@ -60,7 +112,15 @@ export default function StudentRegisterPage() {
                 <Label>Email Address</Label>
                 <div className="relative">
                   <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <Input type="email" placeholder="student@college.edu" className="pl-10" required />
+                  <Input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="student@college.edu"
+                    className="pl-10"
+                    required
+                  />
                 </div>
               </div>
 
@@ -69,7 +129,14 @@ export default function StudentRegisterPage() {
                 <Label>Roll / Registration Number</Label>
                 <div className="relative">
                   <GraduationCap className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <Input placeholder="CSE2022-045" className="pl-10" required />
+                  <Input
+                    name="rollNumber"
+                    value={formData.rollNumber}
+                    onChange={handleChange}
+                    placeholder="CSE2022-045"
+                    className="pl-10"
+                    required
+                  />
                 </div>
               </div>
 
@@ -78,17 +145,34 @@ export default function StudentRegisterPage() {
                 <Label>Password</Label>
                 <div className="relative">
                   <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <Input type="password" placeholder="••••••••" className="pl-10" required />
+                  <Input
+                    type="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    placeholder="••••••••"
+                    className="pl-10"
+                    required
+                  />
                 </div>
               </div>
 
               {/* Wallet */}
               <div className="space-y-2">
                 <Label>Wallet Address (optional)</Label>
-                <Input placeholder="0xABC123..." />
+                <Input
+                  name="walletAddress"
+                  value={formData.walletAddress}
+                  onChange={handleChange}
+                  placeholder="0xABC123..."
+                />
               </div>
 
-              <Button className="w-full bg-gradient-to-r from-primary to-accent" disabled={isLoading}>
+              <Button
+                type="submit"
+                className="w-full bg-gradient-to-r from-primary to-accent"
+                disabled={isLoading}
+              >
                 {isLoading ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -102,7 +186,10 @@ export default function StudentRegisterPage() {
 
             <p className="text-center text-sm text-muted-foreground">
               Already registered?{" "}
-              <Link href="/login/student" className="text-primary font-medium hover:underline">
+              <Link
+                href="/login/student"
+                className="text-primary font-medium hover:underline"
+              >
                 Sign in
               </Link>
             </p>

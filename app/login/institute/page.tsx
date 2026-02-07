@@ -27,10 +27,12 @@ export default function InstituteLoginPage() {
     try {
       if (email && password) {
         const resp=await axiosApi({
-          ...endPoints.auth.adminLogin,
+          ...endPoints.auth.instituteLogin,
           data:{email,password}
         })
-        router.push("otp")
+        localStorage.setItem("otp_allowed", "true");
+localStorage.setItem("otp_email", email);
+        router.push(`otp?email=${email}&role=institute`)
       } else {
         setError("Please fill in all required fields")
       }

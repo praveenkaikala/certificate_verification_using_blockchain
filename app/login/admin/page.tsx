@@ -28,7 +28,9 @@ export default function AdminLoginPage() {
           ...endPoints.auth.adminLogin,
           data:{email,password}
         })
-        router.push("otp")
+        localStorage.setItem("otp_allowed", "true");
+localStorage.setItem("otp_email", email);
+        router.push(`otp?email=${email}&role=admin`)
       } else {
         setError("Please fill in all fields")
       }
