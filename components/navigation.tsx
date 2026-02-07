@@ -15,7 +15,8 @@ export function Navigation() {
   const [islogin,setIsLogin]=useState(false)
   useEffect(() => setMounted(true), [])
   useEffect(()=>{
-    setIsLogin((prev)=>localStorage.getItem("islogin")==="true" || false)
+    // setIsLogin((prev)=>localStorage.getItem("islogin")==="true" || false)
+    setIsLogin(false)
   },[pathname])
   useEffect(()=>{
     console.log(islogin)
