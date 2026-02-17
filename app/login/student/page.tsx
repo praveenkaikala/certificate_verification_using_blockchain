@@ -26,7 +26,7 @@ export default function StudentLoginPage() {
     try {
       if (email && password) {
         const resp=await axiosApi({
-          ...endPoints.auth.adminLogin,
+          ...endPoints.auth.studentLogin,
           data:{email,password}
         })
         localStorage.setItem("otp_allowed", "true");

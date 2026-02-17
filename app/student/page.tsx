@@ -27,7 +27,11 @@ export default function StudentPage() {
               <p className="text-muted-foreground mb-3">{studentInfo.email}</p>
               <p className="text-sm text-muted-foreground">Member since {studentInfo.enrolledDate}</p>
             </div>
-            <Award className="h-12 w-12 text-primary opacity-20" />
+             <Card className=" border-border p-4 w-50 ">
+          <p className="text-muted-foreground text-sm mb-1">Total Certificates</p>
+          <p className="text-3xl font-bold">{"3"}</p>
+        </Card>
+            {/* <Award className="h-12 w-12 text-primary opacity-20" /> */}
           </div>
         </Card>
 

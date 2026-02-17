@@ -8,7 +8,7 @@ export default function VerifyPage() {
     <main className="min-h-screen bg-background">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
         {/* Hero Section */}
-        <Heading title="Verify Certificates" description=" Instantly verify blockchain-issued certificates. Search by certificate ID, blockchain ID, or recipient email
+        <Heading title="Verify Certificates" description=" Instantly verify blockchain-issued certificates. Search by certificate ID
             to confirm authenticity."/>
        
 
@@ -25,7 +25,7 @@ export default function VerifyPage() {
               </div>
               <h3 className="font-semibold text-foreground">Enter Certificate Details</h3>
               <p className="text-muted-foreground text-sm">
-                Provide the certificate ID, blockchain ID, or recipient email address.
+                Provide the certificate ID
               </p>
             </div>
             <div className="space-y-3">

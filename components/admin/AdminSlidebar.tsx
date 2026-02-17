@@ -30,16 +30,16 @@ const sidebarItems: SidebarItem[] = [
     href: "/admin/institutes/",
     icon: Upload,
   },
-  {
-    label: "Users",
-    href: "/admin/users",
-    icon: FileCheck2,
-  },
-  {
-    label: "Settings",
-    href: "/institute/settings",
-    icon: Settings,
-  },
+  // {
+  //   label: "Users",
+  //   href: "/admin/users",
+  //   icon: FileCheck2,
+  // },
+  // {
+  //   label: "Settings",
+  //   href: "/admin/settings",
+  //   icon: Settings,
+  // },
 ];
 
 const AdminSidebar = () => {

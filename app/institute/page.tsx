@@ -26,7 +26,7 @@ export default function IssuePage() {
         </div>
 
         {/* Stats Overview */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
           <Card className="bg-card border-border p-6 hover:border-primary/50 transition-colors">
             <div className="flex items-center justify-between">
               <div>
@@ -45,7 +45,7 @@ export default function IssuePage() {
               <TrendingUp className="h-8 w-8 text-accent opacity-20" />
             </div>
           </Card>
-          <Card className="bg-card border-border p-6 hover:border-primary/50 transition-colors">
+          {/* <Card className="bg-card border-border p-6 hover:border-primary/50 transition-colors">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-muted-foreground text-sm mb-1">Verified</p>
@@ -53,7 +53,7 @@ export default function IssuePage() {
               </div>
               <CheckCircle className="h-8 w-8 text-green-500 opacity-20" />
             </div>
-          </Card>
+          </Card> */}
           <Card className="bg-card border-border p-6 hover:border-primary/50 transition-colors">
             <div className="flex items-center justify-between">
               <div>

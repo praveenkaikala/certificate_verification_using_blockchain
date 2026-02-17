@@ -3,10 +3,22 @@
 import { useState } from "react"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+// import { DataTable } from "@/components"
 import { Search, Filter, Eye, Download, Trash2 } from "lucide-react"
+import { DataTable } from "../TableCom"
+
+type Certificate = {
+  id: string
+  recipient: string
+  email: string
+  program: string
+  issueDate: string
+  status: "verified" | "pending"
+  blockchainId: string
+}
 
 export function InstituteDashboard() {
-  const [certificates, setCertificates] = useState([
+  const [certificates] = useState<Certificate[]>([
     {
       id: "CERT-001",
       recipient: "John Doe",
@@ -54,102 +66,108 @@ export function InstituteDashboard() {
     },
   ])
 
-  const getStatusColor = (status: string) => {
-    return status === "verified" ? "text-green-500" : "text-yellow-500"
-  }
+  const getStatusColor = (status: string) =>
+    status === "verified" ? "text-green-500 bg-green-500/10" : "text-yellow-500 bg-yellow-500/10"
 
-  const getStatusBg = (status: string) => {
-    return status === "verified" ? "bg-green-500/10" : "bg-yellow-500/10"
-  }
+  const columns = [
+    {
+      key: "id",
+      header: "Certificate ID",
+    },
+    {
+      key: "recipient",
+      header: "Recipient",
+      cell: (row: Certificate) => (
+        <div>
+          <div className="font-medium text-foreground">{row.recipient}</div>
+          <div className="text-xs text-muted-foreground">{row.email}</div>
+        </div>
+      ),
+    },
+    {
+      key: "program",
+      header: "Program",
+    },
+    {
+      key: "issueDate",
+      header: "Issued",
+    },
+    {
+      key: "status",
+      header: "Status",
+      cell: (row: Certificate) => (
+        <span
+          className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium capitalize ${getStatusColor(
+            row.status
+          )}`}
+        >
+          {row.status}
+        </span>
+      ),
+    },
+    {
+      key: "blockchainId",
+      header: "Blockchain ID",
+      cell: (row: Certificate) => (
+        <span className="font-mono text-xs text-muted-foreground">
+          {row.blockchainId}
+        </span>
+      ),
+    },
+    {
+      key: "actions",
+      header: "Actions",
+      cell: () => (
+        <div className="flex gap-2 justify-center">
+          <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+            <Eye className="h-4 w-4" />
+          </Button>
+          <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+            <Download className="h-4 w-4" />
+          </Button>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="h-8 w-8 p-0 hover:text-destructive"
+          >
+            <Trash2 className="h-4 w-4" />
+          </Button>
+        </div>
+      ),
+    },
+  ]
 
   return (
     <div className="space-y-6">
-      {/* Filters and Search */}
-      <Card className="bg-card border-border p-4">
+      {/* Filters & Search */}
+      <Card className="p-4">
         <div className="flex flex-col md:flex-row gap-3 items-center">
           <div className="flex-1 relative">
             <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
             <input
               type="text"
               placeholder="Search certificates, recipients..."
-              className="w-full pl-10 pr-4 py-2 bg-background border border-border rounded-md text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
+              className="w-full pl-10 pr-4 py-2 border rounded-md bg-background"
             />
           </div>
-          <Button variant="outline" className="gap-2 w-full md:w-auto bg-transparent">
+          {/* <Button variant="outline" className="gap-2">
             <Filter className="h-4 w-4" />
             Filter
           </Button>
-          <Button variant="outline" className="gap-2 w-full md:w-auto bg-transparent">
+          <Button variant="outline" className="gap-2">
             <Download className="h-4 w-4" />
             Export
-          </Button>
+          </Button> */}
         </div>
       </Card>
 
-      {/* Certificates Table */}
-      <Card className="bg-card border-border overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead>
-              <tr className="border-b border-border bg-background/50">
-                <th className="px-6 py-3 text-left text-sm font-semibold text-foreground">Certificate ID</th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-foreground">Recipient</th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-foreground">Program</th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-foreground">Issued</th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-foreground">Status</th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-foreground">Blockchain ID</th>
-                <th className="px-6 py-3 text-center text-sm font-semibold text-foreground">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-border">
-              {certificates.map((cert) => (
-                <tr key={cert.id} className="hover:bg-background/50 transition-colors">
-                  <td className="px-6 py-4 text-sm font-medium text-foreground">{cert.id}</td>
-                  <td className="px-6 py-4 text-sm text-muted-foreground">
-                    <div>{cert.recipient}</div>
-                    <div className="text-xs text-muted-foreground/70">{cert.email}</div>
-                  </td>
-                  <td className="px-6 py-4 text-sm text-muted-foreground">{cert.program}</td>
-                  <td className="px-6 py-4 text-sm text-muted-foreground">{cert.issueDate}</td>
-                  <td className="px-6 py-4">
-                    <span
-                      className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${getStatusBg(cert.status)} ${getStatusColor(cert.status)}`}
-                    >
-                      {cert.status.charAt(0).toUpperCase() + cert.status.slice(1)}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 text-sm font-mono text-muted-foreground text-xs">{cert.blockchainId}</td>
-                  <td className="px-6 py-4">
-                    <div className="flex gap-2 justify-center">
-                      <Button variant="ghost" size="sm" className="h-8 w-8 p-0" title="View Certificate">
-                        <Eye className="h-4 w-4" />
-                      </Button>
-                      <Button variant="ghost" size="sm" className="h-8 w-8 p-0" title="Download">
-                        <Download className="h-4 w-4" />
-                      </Button>
-                      <Button variant="ghost" size="sm" className="h-8 w-8 p-0 hover:text-destructive" title="Delete">
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        {/* Pagination */}
-        <div className="border-t border-border bg-background/50 px-6 py-4 flex items-center justify-between">
-          <p className="text-sm text-muted-foreground">Showing 1 to 5 of 47 certificates</p>
-          <div className="flex gap-2">
-            <Button variant="outline" size="sm" disabled>
-              Previous
-            </Button>
-            <Button variant="outline" size="sm">
-              Next
-            </Button>
-          </div>
-        </div>
+      {/* Data Table */}
+      <Card className="p-4">
+        <DataTable
+          columns={columns}
+          data={certificates}
+          pageSize={5}
+        />
       </Card>
     </div>
   )

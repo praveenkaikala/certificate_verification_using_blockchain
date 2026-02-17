@@ -1,6 +1,6 @@
-export const backend_url:string="https://certificate-verification-backend.vercel.app/api/v1/"
+export const backend_url:string="http://localhost:5000/api/v1/"
 type HttpMethod = "get" | "post" | "put" | "delete";
-
+// "https://certificate-verification-backend.vercel.app/api/v1/"
 interface StaticBody {
   method: HttpMethod;
   url: string;
@@ -35,9 +35,12 @@ interface InstituteStudents {
 
 interface InstituteCertificates {
   issue: StaticBody;
+  putIssue:StaticBody;
   getIssued: StaticBody;
 }
-
+interface Public{
+  details:any;
+}
 interface Institute {
   students: InstituteStudents;
   certificates: InstituteCertificates;
@@ -58,8 +61,17 @@ export interface EndPoints {
   admin: Admin;
   institute: Institute;
   student: Student;
+  public:Public;
 }
 export const endPoints: EndPoints = {
+  public:{
+    details:(id:string)=>{
+      return {
+      method: "get",
+      url: `public/details/${id}`
+      }
+    }
+  },
   auth: {
     adminLogin: {
       method: "post",
@@ -113,32 +125,36 @@ export const endPoints: EndPoints = {
     students: {
       getAll: {
         method: "get",
-        url: "institute/students",
+        url: "institutes/students",
       },
       getById: {
         method: "get",
         url: (studentId: string) =>
-          `institute/students/${studentId}`,
+          `institutes/students/${studentId}`,
       },
       verify: {
         method: "put",
         url: (studentId: string) =>
-          `institute/students/${studentId}/verify`,
+          `institutes/students/${studentId}/verify`,
       },
       remove: {
         method: "delete",
         url: (studentId: string) =>
-          `institute/students/${studentId}`,
+          `institutes/students/${studentId}`,
       },
     },
     certificates: {
       issue: {
         method: "post",
-        url: "institute/certificates",
+        url: "institutes/certificates",
+      },
+       putIssue: {
+        method: "put",
+        url: "institutes/certificates",
       },
       getIssued: {
         method: "get",
-        url: "institute/certificates",
+        url: "institutes/certificates",
       },
     },
   },

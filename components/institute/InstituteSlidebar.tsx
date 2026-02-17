@@ -30,26 +30,26 @@ const sidebarItems: SidebarItem[] = [
     href: "/institute/certificates/issue",
     icon: Upload,
   },
+  // {
+  //   label: "My Certificates",
+  //   href: "/institute/certificates",
+  //   icon: FileCheck2,
+  // },
   {
-    label: "My Certificates",
-    href: "/institute/certificates",
-    icon: FileCheck2,
+    label: "Students",
+    href: "/institute/students",
+    icon: Users,
   },
-//   {
-//     label: "Students",
-//     href: "/institute/students",
-//     icon: Users,
-//   },
   {
     label: "Student Approvals",
-    href: "/institute/students",
+    href: "/institute/students/approvals",
     icon: ShieldCheck,
   },
-  {
-    label: "Settings",
-    href: "/institute/settings",
-    icon: Settings,
-  },
+  // {
+  //   label: "Settings",
+  //   href: "/institute/settings",
+  //   icon: Settings,
+  // },
 ];
 
 const InstituteSidebar = () => {
