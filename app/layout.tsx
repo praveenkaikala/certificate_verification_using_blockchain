@@ -6,7 +6,7 @@ import "./globals.css"
 import { Navigation } from "@/components/navigation"
 import { ThemeProvider } from "@/components/theme-provider"
 import ScrollToTop from "@/components/ScrollToTop"
-
+import toast, { Toaster } from 'react-hot-toast';
 const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
@@ -29,7 +29,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem storageKey="skillchain-theme">
           <Navigation />
           <ScrollToTop>
-
+           <Toaster />
           {children}
           </ScrollToTop>
         </ThemeProvider>

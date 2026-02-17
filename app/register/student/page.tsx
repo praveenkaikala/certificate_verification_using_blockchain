@@ -18,6 +18,7 @@ import { ArrowLeft, Mail, Lock, User, GraduationCap, Loader2 } from "lucide-reac
 import axiosApi from "@/utils/axios";
 import { endPoints } from "@/utils/publicUrls";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 export default function StudentRegisterPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -26,9 +27,10 @@ export default function StudentRegisterPage() {
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
-    rollNumber: "",
+    phone:"",
+    reg_no: "",
+    instituteId:"",
     password: "",
-    walletAddress: "",
   });
 const router=useRouter()
   // ✅ handle input change
@@ -49,19 +51,18 @@ const router=useRouter()
         data:{
           name: formData.fullName,
           email: formData.email,
-          phone:"1234",
-          instituteId:"6976e2be2a0977e1b5cecc4c",
-          reg_no: formData.rollNumber,
+          phone:formData.phone,
+          instituteId:formData.instituteId,
+          reg_no: formData.reg_no,
           password: formData.password,
-          walletAddress: formData.walletAddress || undefined,
         },
       }
       );
-
+      toast.success("Registation Success")
      router.push("/")
     } catch (error: any) {
       console.error(error);
-      alert(
+      toast.error(
         error.response?.data?.message ||
           "Registration failed. Please try again."
       );
@@ -74,11 +75,11 @@ const router=useRouter()
     <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background to-muted/30 px-4 py-8">
       <div className="w-full max-w-md animate-in fade-in slide-in-from-bottom-4 duration-1000">
         <Link
-          href="/login"
+          href="/register"
           className="flex items-center gap-2 text-muted-foreground hover:text-foreground mb-8"
         >
           <ArrowLeft className="h-4 w-4" />
-          Back to Login
+          Back to Registration
         </Link>
 
         <Card className="border-0 shadow-lg">
@@ -123,6 +124,21 @@ const router=useRouter()
                   />
                 </div>
               </div>
+               <div className="space-y-2">
+                <Label>Phone</Label>
+                <div className="relative">
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    type="number"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    placeholder="1234567890"
+                    className="pl-10"
+                    required
+                  />
+                </div>
+              </div>
 
               {/* Roll Number */}
               <div className="space-y-2">
@@ -130,10 +146,24 @@ const router=useRouter()
                 <div className="relative">
                   <GraduationCap className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
-                    name="rollNumber"
-                    value={formData.rollNumber}
+                    name="reg_no"
+                    value={formData.reg_no}
                     onChange={handleChange}
-                    placeholder="CSE2022-045"
+                    placeholder="23B95A"
+                    className="pl-10"
+                    required
+                  />
+                </div>
+                </div>
+                 <div className="space-y-2">
+                <Label>Institute Registration Number</Label>
+                <div className="relative">
+                  <GraduationCap className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    name="instituteId"
+                    value={formData.instituteId}
+                    onChange={handleChange}
+                    placeholder="SRKREC"
                     className="pl-10"
                     required
                   />
@@ -158,7 +188,7 @@ const router=useRouter()
               </div>
 
               {/* Wallet */}
-              <div className="space-y-2">
+              {/* <div className="space-y-2">
                 <Label>Wallet Address (optional)</Label>
                 <Input
                   name="walletAddress"
@@ -166,7 +196,7 @@ const router=useRouter()
                   onChange={handleChange}
                   placeholder="0xABC123..."
                 />
-              </div>
+              </div> */}
 
               <Button
                 type="submit"

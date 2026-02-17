@@ -18,6 +18,7 @@ import { ArrowLeft, Mail, Lock, Building2, Loader2 } from "lucide-react";
 import axiosApi from "@/utils/axios";
 import { endPoints } from "@/utils/publicUrls";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 export default function InstituteRegisterPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -61,10 +62,11 @@ export default function InstituteRegisterPage() {
       );
 
       console.log("Success:", res.data);
+      toast.success("Registration Successfull")
       router.push("/")
     } catch (error: any) {
       console.error(error);
-      alert(
+      toast.error(
         error.response?.data?.message ||
           "Registration failed. Please try again."
       );
