@@ -21,6 +21,7 @@ interface Auth {
   verifyOtp: StaticBody;
 }
 interface Admin {
+  getStats:StaticBody;
   getInstitutes: StaticBody;
   getInstituteById: DynamicBody;
   verifyInstitute: DynamicBody;
@@ -100,6 +101,10 @@ export const endPoints: EndPoints = {
   },
 
   admin: {
+    getStats:{
+      method:"get",
+      url:"admin/stats"
+    },
     getInstitutes: {
       method: "get",
       url: "admin/institutes",

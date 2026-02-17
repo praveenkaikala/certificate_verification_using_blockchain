@@ -1,13 +1,35 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Card } from "@/components/ui/card"
 import { AdminOverview } from "@/components/dashboard/admin-overview"
 import { AdminTabs } from "@/components/dashboard/admin-tabs"
-
+import toast from "react-hot-toast"
+import axiosApi from "@/utils/axios"
+import { endPoints } from "@/utils/publicUrls"
+interface Stats{
+  totalcertificates:string;
+  totalInstitutes:string;
+  totalStudents:string;
+  topInstitutes:any
+}
 export default function AdminPage() {
   const [activeTab, setActiveTab] = useState("overview")
-
+  const [stats,setStats]=useState<Stats | null>()
+  useEffect(()=>{
+   getStats()
+  },[])
+const getStats=async()=>{
+  try {
+      const resp=await axiosApi({
+        ...endPoints.admin.getStats
+      })
+      console.log(resp?.data)
+      setStats(resp?.data?.data)
+    } catch (error) {
+      console.log(error)
+    }
+}
   return (
     <main className="min-h-screen bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -21,18 +43,18 @@ export default function AdminPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
           <Card className="bg-card border-border p-4 hover:border-primary/50 transition-colors">
             <p className="text-muted-foreground text-xs mb-1">Total Certificates</p>
-            <p className="text-3xl font-bold">12,847</p>
-            <p className="text-xs text-green-500 mt-1">+12% this month</p>
+            <p className="text-3xl font-bold">{stats?.totalcertificates}</p>
+            {/* <p className="text-xs text-green-500 mt-1">+12% this month</p> */}
           </Card>
           <Card className="bg-card border-border p-4 hover:border-primary/50 transition-colors">
             <p className="text-muted-foreground text-xs mb-1">Active Institutions</p>
-            <p className="text-3xl font-bold">47</p>
-            <p className="text-xs text-green-500 mt-1">+3 new this month</p>
+            <p className="text-3xl font-bold">{stats?.totalInstitutes}</p>
+            {/* <p className="text-xs text-green-500 mt-1">+3 new this month</p> */}
           </Card>
           <Card className="bg-card border-border p-4 hover:border-primary/50 transition-colors ">
             <p className="text-muted-foreground text-xs mb-1">Registered Students</p>
-            <p className="text-3xl font-bold">28,392</p>
-            <p className="text-xs text-green-500 mt-1">+5.2% growth</p>
+            <p className="text-3xl font-bold">{stats?.totalStudents}</p>
+            {/* <p className="text-xs text-green-500 mt-1">+5.2% growth</p> */}
           </Card>
           {/* <Card className="bg-card border-border p-4 hover:border-primary/50 transition-colors">
             <p className="text-muted-foreground text-xs mb-1">Verification Rate</p>
@@ -47,7 +69,7 @@ export default function AdminPage() {
         </div>
 
         {/* Tab Navigation */}
-        <div className="flex gap-2 mb-6 border-b border-border">
+        {/* <div className="flex gap-2 mb-6 border-b border-border">
           {[
             { id: "overview", label: "Overview" },
             { id: "institutions", label: "Institutions" },
@@ -67,11 +89,11 @@ export default function AdminPage() {
               {tab.label}
             </button>
           ))}
-        </div>
+        </div> */}
 
         {/* Tab Content */}
-        {activeTab === "overview" && <AdminOverview />}
-        {activeTab !== "overview" && <AdminTabs activeTab={activeTab} />}
+        {activeTab === "overview" && <AdminOverview  topInstitutions={stats?.topInstitutes || []}/>}
+        {/* {activeTab !== "overview" && <AdminTabs activeTab={activeTab} />} */}
       </div>
     </main>
   )

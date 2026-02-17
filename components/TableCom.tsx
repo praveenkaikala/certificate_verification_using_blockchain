@@ -80,7 +80,7 @@ export function DataTable<T>({
       </Table>
 
       {/* Pagination */}
-      {totalPages > 1 && (
+    
         <div className="flex items-center justify-between">
           <p className="text-sm text-muted-foreground">
             Page {page} of {totalPages}
@@ -104,7 +104,7 @@ export function DataTable<T>({
             </button>
           </div>
         </div>
-      )}
+      
     </div>
   )
 }

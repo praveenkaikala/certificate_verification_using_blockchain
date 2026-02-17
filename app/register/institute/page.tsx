@@ -52,9 +52,6 @@ export default function InstituteRegisterPage() {
              email: formData.email,
              reg_no: formData.registrationNumber,
              password: formData.password,
-             address:"",
-             phone:"",
-             walletAddress: formData.walletAddress,
            },
         }
       
@@ -79,11 +76,11 @@ export default function InstituteRegisterPage() {
     <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background to-muted/30 px-4 py-8">
       <div className="w-full max-w-md animate-in fade-in slide-in-from-bottom-4 duration-1000">
         <Link
-          href="/login"
+          href="/register"
           className="flex items-center gap-2 text-muted-foreground hover:text-foreground mb-8"
         >
           <ArrowLeft className="h-4 w-4" />
-          Back to Login
+          Back to Registration
         </Link>
 
         <Card className="border-0 shadow-lg">
@@ -136,7 +133,7 @@ export default function InstituteRegisterPage() {
                   name="registrationNumber"
                   value={formData.registrationNumber}
                   onChange={handleChange}
-                  placeholder="INST-REG-2026"
+                  placeholder="SRKREC"
                   required
                 />
               </div>
@@ -159,7 +156,7 @@ export default function InstituteRegisterPage() {
               </div>
 
               {/* Wallet */}
-              <div className="space-y-2">
+              {/* <div className="space-y-2">
                 <Label>Institute Wallet Address</Label>
                 <Input
                   name="walletAddress"
@@ -168,7 +165,7 @@ export default function InstituteRegisterPage() {
                   placeholder="0xDEF456..."
                   required
                 />
-              </div>
+              </div> */}
 
               <Button
                 type="submit"
