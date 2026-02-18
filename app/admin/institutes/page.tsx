@@ -1,67 +1,65 @@
 'use client'
 
 import { DataTable } from '@/components/TableCom'
+import axiosApi from '@/utils/axios'
+import { endPoints } from '@/utils/publicUrls'
 import React, { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 
 type Institute = {
-  id: string
+  _id: string
   name: string
   email: string
-  status: 'active' | 'blocked'
+  isApproved: boolean
 }
 
 const Page = () => {
   const [institutes, setInstitutes] = useState<Institute[]>([])
   const [loadingId, setLoadingId] = useState<string | null>(null)
-
+  const [page,setPage]=useState(1);
+  const [limit,setLimit]=useState(10)
+  const [totalPages,setTotalPages]=useState(0)
   useEffect(() => {
     fetchInstitutes()
   }, [])
 
   const fetchInstitutes = async () => {
     try {
-      const res = await fetch('https://api.example.com/institutes')
-      const data = await res.json()
-      setInstitutes(data)
+      const res = await axiosApi({
+        ...endPoints.admin.getInstitutes(page,limit)
+      })
+     
+      setInstitutes(res?.data?.data?.institutes)
+      setTotalPages(res?.data?.data?.totalPages)
     } catch (error) {
       console.error('Failed to fetch institutes', error)
     }
   }
 
-  const toggleBlock = async (institute: Institute) => {
-    setLoadingId(institute.id)
+  const toggleBlock = async (instituteId:string) => {
+    setLoadingId(instituteId)
 
     try {
-      await fetch(
-        `https://api.example.com/institutes/${institute.id}/block`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            status:
-              institute.status === 'active'
-                ? 'blocked'
-                : 'active',
-          }),
-        }
-      )
-
+      await axiosApi({
+        ...endPoints.admin.verifyInstitute(instituteId)
+      })
       // optimistic update
       setInstitutes((prev) =>
         prev.map((inst) =>
-          inst.id === institute.id
+          inst._id === instituteId
             ? {
                 ...inst,
-                status:
-                  inst.status === 'active'
-                    ? 'blocked'
-                    : 'active',
+                isApproved:
+                  inst.isApproved
+                    ? false
+                    : true,
               }
             : inst
         )
       )
+      toast.success("Updated Successfully")
     } catch (error) {
-      console.error('Failed to update institute', error)
+      toast.error('Failed to update institute')
     } finally {
       setLoadingId(null)
     }
@@ -73,7 +71,7 @@ const Page = () => {
       header: 'Institute Name',
     },
     {
-      key: 'RegNo',
+      key: 'reg_no',
       header: 'RegNo',
     },
     {
@@ -81,17 +79,17 @@ const Page = () => {
       header: 'Email',
     },
     {
-      key: 'status',
+      key: 'isApproved',
       header: 'Status',
       cell: (row: Institute) => (
         <span
           className={`capitalize font-medium ${
-            row.status === 'active'
+            row.isApproved
               ? 'text-green-600'
               : 'text-red-600'
           }`}
         >
-          {row.status}
+          {row.isApproved ? "Active" : "Inactive"}
         </span>
       ),
     },
@@ -100,17 +98,17 @@ const Page = () => {
       header: 'Action',
       cell: (row: Institute) => (
         <button
-          onClick={() => toggleBlock(row)}
-          disabled={loadingId === row.id}
+          onClick={() => toggleBlock(row._id)}
+          disabled={loadingId === row._id}
           className={`px-3 py-1 rounded text-xs text-white disabled:opacity-50 ${
-            row.status === 'active'
+           row.isApproved
               ? 'bg-red-600 hover:bg-red-700'
               : 'bg-green-600 hover:bg-green-700'
           }`}
         >
-          {loadingId === row.id
+          {loadingId === row._id
             ? 'Processing...'
-            : row.status === 'active'
+            : row.isApproved
             ? 'Block'
             : 'Unblock'}
         </button>
@@ -127,7 +125,10 @@ const Page = () => {
       <DataTable
         columns={columns}
         data={institutes}
-        pageSize={10}
+        pageSize={limit}
+        page={page}
+        setPage={setPage}
+        totalPages={totalPages}
       />
     </div>
   )

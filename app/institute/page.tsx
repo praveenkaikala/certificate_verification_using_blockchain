@@ -1,15 +1,34 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Plus, Award, TrendingUp, Users, CheckCircle } from "lucide-react"
 import { InstituteDashboard } from "@/components/dashboard/institute-dashboard"
 import { IssueModal } from "@/components/dashboard/issue-modal"
-
+import axiosApi from "@/utils/axios"
+import { endPoints } from "@/utils/publicUrls"
+interface Stats{
+        totalStudents:number;
+        totalCertificates:number;
+        issuedThisMonth:number;
+}
 export default function IssuePage() {
   const [showIssueModal, setShowIssueModal] = useState(false)
-
+  const [stats,setStats]=useState<Stats | null>(null)
+  useEffect(()=>{
+getStats()
+  },[])
+const getStats=async()=>{
+  try {
+    const resp=await axiosApi({
+      ...endPoints.institute.getStats
+    })
+    setStats(resp?.data?.data)
+  } catch (error) {
+    console.log(error)
+  }
+}
   return (
     <main className="min-h-screen bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
@@ -31,7 +50,7 @@ export default function IssuePage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-muted-foreground text-sm mb-1">Total Issued</p>
-                <p className="text-2xl font-bold">2,458</p>
+                <p className="text-2xl font-bold">{stats?.totalCertificates || "--"}</p>
               </div>
               <Award className="h-8 w-8 text-primary opacity-20" />
             </div>
@@ -40,7 +59,7 @@ export default function IssuePage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-muted-foreground text-sm mb-1">This Month</p>
-                <p className="text-2xl font-bold">342</p>
+                <p className="text-2xl font-bold">{stats?.issuedThisMonth || "--"}</p>
               </div>
               <TrendingUp className="h-8 w-8 text-accent opacity-20" />
             </div>
@@ -58,7 +77,7 @@ export default function IssuePage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-muted-foreground text-sm mb-1">Students</p>
-                <p className="text-2xl font-bold">1,847</p>
+                <p className="text-2xl font-bold">{stats?.totalStudents || "--"}</p>
               </div>
               <Users className="h-8 w-8 text-accent opacity-20" />
             </div>

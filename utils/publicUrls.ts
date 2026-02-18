@@ -1,4 +1,5 @@
 export const backend_url:string="http://localhost:5000/api/v1/"
+export const pinata_gateway:string ="http://scarlet-impossible-squirrel-929.mypinata.cloud/ipfs/"
 type HttpMethod = "get" | "post" | "put" | "delete";
 // "https://certificate-verification-backend.vercel.app/api/v1/"
 interface StaticBody {
@@ -22,28 +23,31 @@ interface Auth {
 }
 interface Admin {
   getStats:StaticBody;
-  getInstitutes: StaticBody;
-  getInstituteById: DynamicBody;
-  verifyInstitute: DynamicBody;
+  getInstitutes: any;
+  getInstituteById: any;
+  verifyInstitute: any;
   deleteInstitute: DynamicBody;
 }
 interface InstituteStudents {
-  getAll: StaticBody;
+  getAll: any;
   getById: DynamicBody;
-  verify: DynamicBody;
-  remove: DynamicBody;
+  verify: any;
+  getPending:any
+  remove: any;
 }
 
 interface InstituteCertificates {
   issue: StaticBody;
   putIssue:StaticBody;
-  getIssued: StaticBody;
+  getIssued: any;
+  deleteCertificate:any
 }
 interface Public{
   details:any;
 }
 interface Institute {
   students: InstituteStudents;
+  getStats:any
   certificates: InstituteCertificates;
 }
 
@@ -105,19 +109,26 @@ export const endPoints: EndPoints = {
       method:"get",
       url:"admin/stats"
     },
-    getInstitutes: {
-      method: "get",
-      url: "admin/institutes",
+    getInstitutes:(page:number,limit:number)=> {
+      return{
+
+        method: "get",
+        url: `admin/institutes?page=${page}&limit=${limit}`,
+      }
     },
-    getInstituteById: {
-      method: "get",
-      url: (instituteId: string) =>
-        `admin/institutes/${instituteId}`,
+    getInstituteById:(instituteId:string)=> {
+      return {
+
+        method: "get",
+        url: `admin/institutes/${instituteId}`,
+      }
     },
-    verifyInstitute: {
-      method: "put",
-      url: (instituteId: string) =>
-        `admin/institutes/${instituteId}/verify`,
+    verifyInstitute: (instituteId: string) => {
+      return{
+
+        method: "put",
+        url:`admin/institutes/${instituteId}/verify`,
+      }
     },
     deleteInstitute: {
       method: "delete",
@@ -127,25 +138,48 @@ export const endPoints: EndPoints = {
   },
 
   institute: {
+    getStats:{
+      method:"get",
+      url:"institutes/stats"
+    },
     students: {
-      getAll: {
+      getAll: (page:string,limit:string)=>{
+        return{
+          
         method: "get",
-        url: "institutes/students",
+        url: `institutes/students?limit=${limit}&page=${page}`
+        }
       },
       getById: {
         method: "get",
         url: (studentId: string) =>
           `institutes/students/${studentId}`,
       },
-      verify: {
-        method: "put",
-        url: (studentId: string) =>
-          `institutes/students/${studentId}/verify`,
+      verify:(id:string) =>{
+        return{
+
+          method: "put",
+          url: 
+            `institutes/students/${id}/verify`,
+        }
       },
-      remove: {
-        method: "delete",
-        url: (studentId: string) =>
-          `institutes/students/${studentId}`,
+       getPending:(page:string,limit:string)=>{
+        
+return{
+
+  method: "get",
+  url: 
+    `institutes/students/pending?limit=${limit}&page=${page}`,
+}
+      
+      },
+      remove: (id:string)=>{
+        return{
+
+          method: "delete",
+          url:
+            `institutes/students/${id}`,
+        }
       },
     },
     certificates: {
@@ -157,10 +191,19 @@ export const endPoints: EndPoints = {
         method: "put",
         url: "institutes/certificates",
       },
-      getIssued: {
-        method: "get",
-        url: "institutes/certificates",
+      getIssued:(page:number,limit:number)=> {
+        return{
+
+          method: "get",
+          url: `institutes/certificates?page=${page}&limit=${limit}`
+        }
       },
+      deleteCertificate:(id:string)=>{
+        return {
+          method:"delete",
+          url:`institutes/certificates/${id}`
+        }
+      }
     },
   },
 
