@@ -11,7 +11,7 @@ export default function RegisterPage() {
        <div className="w-full max-w-4xl">
         {/* Header */}
       
-          <Heading title="Welcome to SkillChain" description="Create your SkillChain account to access and share your verified academic certificates."/>
+          <Heading title="Welcome to ForgeryShield" description="Create your ForgeryShield account to access and share your verified academic certificates."/>
 
         {/* Role Selection */}
         <div className="grid md:grid-cols-2 gap-6 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200">
@@ -73,7 +73,7 @@ export default function RegisterPage() {
 
           <CardContent className="space-y-6">
             <p className="text-sm text-muted-foreground">
-              Submit your institutional details for admin verification before issuing certificates on SkillChain.
+              Submit your institutional details for admin verification before issuing certificates on ForgeryShield.
             </p>
 
             <Link
@@ -104,7 +104,7 @@ export default function RegisterPage() {
           <p>
             Don't have an account?{" "}
             <Link href="/" className="text-primary hover:underline font-medium">
-              Learn more about SkillChain
+              Learn more about ForgeryShield
             </Link>
           </p>
         </div>

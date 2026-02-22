@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* SkillChain Brand Colors - Light Mode */
+  /* ForgeryShield Brand Colors - Light Mode */
   --background: oklch(0.99 0.001 40);
   --foreground: oklch(0.12 0.01 240);
   --card: oklch(1 0 0);

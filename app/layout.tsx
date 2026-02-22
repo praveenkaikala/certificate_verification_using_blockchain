@@ -26,7 +26,7 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem storageKey="skillchain-theme">
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem storageKey="ForgeryShield-theme">
           <Navigation />
           <ScrollToTop>
            <Toaster />

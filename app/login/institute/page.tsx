@@ -71,7 +71,7 @@ localStorage.setItem("otp_email", email);
           <CardHeader className="space-y-2 pb-6">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-accent to-primary" />
-              <span className="font-bold text-lg">SkillChain</span>
+              <span className="font-bold text-lg">ForgeryShield</span>
             </div>
             <CardTitle className="text-2xl">Institute Login</CardTitle>
             <CardDescription>Sign in to issue and manage certificates for your institution</CardDescription>

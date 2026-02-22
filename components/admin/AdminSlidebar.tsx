@@ -50,7 +50,7 @@ const AdminSidebar = () => {
       {/* Header */}
       <div className="px-6 py-5 border-b">
         <h2 className="text-xl font-bold tracking-tight">Institute Panel</h2>
-        <p className="text-sm text-muted-foreground">SkillChain</p>
+        <p className="text-sm text-muted-foreground">ForgeryShield</p>
       </div>
 
       {/* Navigation */}

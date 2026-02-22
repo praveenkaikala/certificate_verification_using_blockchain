@@ -12,7 +12,7 @@ export default function LoginPage() {
       <div className="w-full max-w-6xl">
         {/* Header */}
       
-        <Heading title="Welcome to SkillChain" description="Choose your role to access your account and manage certificates on the blockchain."/>
+        <Heading title="Welcome to ForgeryShield" description="Choose your role to access your account and manage certificates on the blockchain."/>
 
        
 
@@ -95,7 +95,7 @@ export default function LoginPage() {
           <p>
             Don't have an account?{" "}
             <Link href="/" className="text-primary hover:underline font-medium">
-              Learn more about SkillChain
+              Learn more about ForgeryShield
             </Link>
           </p>
         </div>

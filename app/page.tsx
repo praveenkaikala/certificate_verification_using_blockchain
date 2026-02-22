@@ -19,7 +19,7 @@ export default function HomePage() {
                 </span>
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto text-balance">
-                SkillChain allows verified institutions to issue skill and academic certificates as NFTs on the
+                ForgeryShield allows verified institutions to issue skill and academic certificates as NFTs on the
                 blockchain, instantly verifiable by employers worldwide.
               </p>
             </div>
@@ -44,7 +44,7 @@ export default function HomePage() {
       {/* Features Section */}
       <section className="py-20 md:py-32 bg-card/50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-balance">Why Choose SkillChain?</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-balance">Why Choose ForgeryShield?</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
@@ -106,7 +106,7 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
-              <h4 className="font-bold mb-4">SkillChain</h4>
+              <h4 className="font-bold mb-4">ForgeryShield</h4>
               <p className="text-sm text-muted-foreground">
                 Blockchain-powered credential verification for the modern world.
               </p>
@@ -173,7 +173,7 @@ export default function HomePage() {
             </div>
           </div>
           <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-sm text-muted-foreground">&copy; 2025 SkillChain. All rights reserved.</p>
+            <p className="text-sm text-muted-foreground">&copy; 2025 ForgeryShield. All rights reserved.</p>
             <div className="flex gap-6 mt-4 md:mt-0">
               <a href="#" className="text-sm text-muted-foreground hover:text-foreground">
                 Twitter

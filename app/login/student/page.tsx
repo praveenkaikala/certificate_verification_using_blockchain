@@ -59,7 +59,7 @@ export default function StudentLoginPage() {
           <CardHeader className="space-y-2 pb-6">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-accent" />
-              <span className="font-bold text-lg">SkillChain</span>
+              <span className="font-bold text-lg">ForgeryShield</span>
             </div>
             <CardTitle className="text-2xl">Student Login</CardTitle>
             <CardDescription>Sign in to access your certificates and academic credentials</CardDescription>
