@@ -151,7 +151,7 @@ const handleGetDetails = async () => {
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder="e.g., CERT-001 or 0x742d35cc..."
+              placeholder="e.g., 0x742d35cc..."
               disabled={searching}
               className="flex-1 px-4 py-3 bg-background border border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:opacity-50"
             />
@@ -253,10 +253,10 @@ const handleGetDetails = async () => {
     <div className="bg-gradient-to-r from-primary/20 to-accent/20 p-6 border-b border-border flex items-start justify-between">
       <div>
         <h2 className="text-2xl font-bold text-foreground mb-1">
-          {certDetails.courseName}
+          {certDetails.courseName.toUpperCase()}
         </h2>
         <p className="text-muted-foreground">
-          Issued by {certDetails.instituteId.name}
+          Issued by {certDetails?.instituteId?.name.toUpperCase()}
         </p>
       </div>
       <Award className="h-12 w-12 text-primary opacity-20" />
@@ -274,14 +274,14 @@ const handleGetDetails = async () => {
           <div className="bg-background/50 p-4 rounded-lg">
             <p className="text-xs text-muted-foreground mb-1">Name</p>
             <p className="font-semibold text-foreground">
-              {certDetails.studentId.name}
+              {certDetails?.studentId?.name.toUpperCase()}
             </p>
           </div>
 
           <div className="bg-background/50 p-4 rounded-lg">
             <p className="text-xs text-muted-foreground mb-1">Registration No</p>
             <p className="font-semibold text-foreground">
-              {certDetails.studentId.reg_no}
+              {certDetails?.studentId?.reg_no.toUpperCase()}
             </p>
           </div>
 
