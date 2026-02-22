@@ -7,9 +7,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import axiosApi from "@/utils/axios";
-import { endPoints } from "@/utils/publicUrls";
+import { CONTRACT, endPoints } from "@/utils/publicUrls";
 
-const CONTRACT_ADDRESS = "0x8064fe5F2c06C8b528c835D6f5A11d1e9CDCAE81";
+const CONTRACT_ADDRESS =CONTRACT
 
 const CONTRACT_ABI = [
   "function generateCertificate(string,string,string,string,string)",

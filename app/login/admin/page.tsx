@@ -42,7 +42,7 @@ localStorage.setItem("otp_email", email);
   }
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background to-muted/30 px-4 py-8">
+    <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background to-muted/30 px-2 py-4">
       <div className="w-full max-w-md animate-in fade-in slide-in-from-bottom-4 duration-1000">
         {/* Back Button */}
         <Link
@@ -122,7 +122,7 @@ localStorage.setItem("otp_email", email);
               {/* Submit Button */}
               <Button
                 type="submit"
-                className="w-full mt-6 bg-gradient-to-r from-destructive to-accent hover:opacity-90"
+                className="w-full mt-6 bg-gradient-to-r from-destructive to-accent hover:opacity-90 mb-3"
                 disabled={isLoading}
               >
                 {isLoading ? (
@@ -137,7 +137,7 @@ localStorage.setItem("otp_email", email);
             </form>
 
             {/* Divider */}
-            <div className="relative">
+            {/* <div className="relative">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-border" />
               </div>
@@ -147,27 +147,27 @@ localStorage.setItem("otp_email", email);
             </div>
 
             {/* MetaMask Button */}
-            <Button variant="outline" className="w-full bg-transparent" disabled={isLoading}>
+            {/* <Button variant="outline" className="w-full bg-transparent" disabled={isLoading}>
               <Shield className="h-4 w-4 mr-2 text-destructive" />
               Connect with MetaMask
-            </Button>
+            </Button>  */}
 
             {/* Sign Up Link */}
-            <div className="text-center text-sm">
+            {/* <div className="text-center text-sm">
               <span className="text-muted-foreground">
                 Don’t have an admin account?{" "}
                 <Link href="#" className="text-destructive hover:underline font-medium">
                   Request access
                 </Link>
               </span>
-            </div>
+            </div> */}
           </CardContent>
         </Card>
 
         {/* Security Note */}
-        <p className="text-center text-xs text-muted-foreground mt-6">
+        {/* <p className="text-center text-xs text-muted-foreground mt-6">
           Admin access is restricted. All activities are logged and secured via blockchain verification.
-        </p>
+        </p> */}
       </div>
     </main>
   )

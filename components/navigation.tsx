@@ -12,37 +12,78 @@ export function Navigation() {
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [islogin,setIsLogin]=useState(false)
+  const [isLogin, setIsLogin] = useState(false)
+  const [role, setRole] = useState<string | null>(null)
+
   useEffect(() => setMounted(true), [])
-  useEffect(()=>{
-    // setIsLogin((prev)=>localStorage.getItem("islogin")==="true" || false)
-    setIsLogin(false)
-  },[pathname])
-  useEffect(()=>{
-    console.log(islogin)
-  },[pathname])
-  const isActive = (path: string) => pathname === path || pathname.startsWith(path)
-  const navigationItems = [
-    // { label: "Issue", path: "/issue" },
+
+  useEffect(() => {
+    var loginStatus=false
+    if(localStorage.getItem("token")) loginStatus=true
+    const userRole = localStorage.getItem("role")
+
+    setIsLogin(loginStatus)
+    setRole(userRole)
+  }, [pathname])
+
+  const isActive = (path: string) =>
+    pathname === path || pathname.startsWith(path)
+
+  /* =============================
+     ROLE BASED NAVIGATION
+  ============================== */
+
+  const publicItems = [
     { label: "Verify", path: "/verify" },
-    // { label: "My Certificates", path: "/student" },
-    // { label: "Admin", path: "/admin" },
     { label: "Login", path: "/login" },
-     { label: "Register", path: "/register" },
+    { label: "Register", path: "/register" },
   ]
+
+  const adminItems = [
+    { label: "Admin", path: "/admin" },
+  ]
+
+  const instituteItems = [
+    { label: "Institute", path: "/institute" },
+  ]
+
+  const studentItems = [
+    { label: "Student", path: "/student" },
+  ]
+
+  const getNavigationItems = () => {
+    if (!isLogin) return publicItems
+
+    switch (role) {
+      case "admin":
+        return [...adminItems,{ label: "Verify", path: "/verify" }]
+      case "institute":
+        return [...instituteItems,{ label: "Verify", path: "/verify" }]
+      case "student":
+        return [...studentItems,{ label: "Verify", path: "/verify" }]
+      default:
+        return []
+    }
+  }
+
+  const navigationItems = getNavigationItems()
 
   return (
     <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
+
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 font-bold text-xl hover:opacity-80 transition-opacity">
+          <Link
+            href="/"
+            className="flex items-center gap-2 font-bold text-xl hover:opacity-80 transition-opacity"
+          >
             <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg"></div>
             <span className="hidden sm:inline">ForgeryShield</span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-1 sm:gap-2">
+          {/* Desktop */}
+          <div className="hidden md:flex items-center gap-2">
             {navigationItems.map((item) => (
               <Link
                 key={item.path}
@@ -51,8 +92,7 @@ export function Navigation() {
                   isActive(item.path)
                     ? "bg-primary text-primary-foreground"
                     : "text-muted-foreground hover:text-foreground"
-                } ${ islogin && item.label=="Login" && " hidden"
-                    }`}
+                }`}
               >
                 {item.label}
               </Link>
@@ -62,28 +102,52 @@ export function Navigation() {
               <Button
                 variant="ghost"
                 size="icon"
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="ml-2"
+                onClick={() =>
+                  setTheme(theme === "dark" ? "light" : "dark")
+                }
               >
-                {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                {theme === "dark" ? (
+                  <Sun className="h-4 w-4" />
+                ) : (
+                  <Moon className="h-4 w-4" />
+                )}
               </Button>
             )}
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Buttons */}
           <div className="md:hidden flex items-center gap-2">
             {mounted && (
-              <Button variant="ghost" size="icon" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
-                {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() =>
+                  setTheme(theme === "dark" ? "light" : "dark")
+                }
+              >
+                {theme === "dark" ? (
+                  <Sun className="h-4 w-4" />
+                ) : (
+                  <Moon className="h-4 w-4" />
+                )}
               </Button>
             )}
-            <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
             </Button>
           </div>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="md:hidden border-t border-border">
             <div className="px-2 pt-2 pb-3 space-y-1">

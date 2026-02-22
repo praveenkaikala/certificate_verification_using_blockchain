@@ -80,6 +80,7 @@ export default function OTPAuthClient() {
       });
 
       localStorage.setItem("token", res.data.token);
+      localStorage.setItem("role", role || "");
       localStorage.removeItem("otp_allowed");
       localStorage.removeItem("otp_email");
 

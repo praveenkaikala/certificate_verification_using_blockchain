@@ -150,7 +150,7 @@ localStorage.setItem("otp_email", email);
             </form>
 
             {/* Divider */}
-            <div className="relative">
+            {/* <div className="relative">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-border" />
               </div>
@@ -160,7 +160,7 @@ localStorage.setItem("otp_email", email);
             </div>
 
             {/* Wallet Connection */}
-            <div className="space-y-3">
+            {/* <div className="space-y-3">
               {walletAddress ? (
                 <div className="p-3 rounded-lg bg-accent/10 border border-accent/20 flex items-center gap-2">
                   <Building2 className="h-4 w-4 text-accent" />
@@ -180,7 +180,7 @@ localStorage.setItem("otp_email", email);
                   Connect MetaMask Wallet
                 </Button>
               )}
-            </div>
+            </div> */} 
 
             {/* Sign Up Link */}
             <div className="text-center text-sm">
@@ -195,9 +195,9 @@ localStorage.setItem("otp_email", email);
         </Card>
 
         {/* Security Note */}
-        <p className="text-center text-xs text-muted-foreground mt-6">
+        {/* <p className="text-center text-xs text-muted-foreground mt-6">
           Institution accounts require blockchain wallet verification for certificate issuance.
-        </p>
+        </p> */}
       </div>
     </main>
   )

@@ -1,5 +1,6 @@
 export const backend_url:string="http://localhost:5000/api/v1/"
 export const pinata_gateway:string ="http://scarlet-impossible-squirrel-929.mypinata.cloud/ipfs/"
+export const CONTRACT="0x5f9af9856E4b7Dd1EeCEF08CD5520eaB58b938eB"
 type HttpMethod = "get" | "post" | "put" | "delete";
 // "https://certificate-verification-backend.vercel.app/api/v1/"
 interface StaticBody {
@@ -210,17 +211,17 @@ return{
   student: {
     stats: {
       method: "get",
-      url: "student/stats",
+      url: "students/stats",
     },
     certificates: {
       getAll: {
         method: "get",
-        url: "student/certificates",
+        url: "students/certificates",
       },
       getById: {
         method: "get",
         url: (certificateId: string) =>
-          `student/certificates/${certificateId}`,
+          `students/certificates/${certificateId}`,
       },
     },
   },

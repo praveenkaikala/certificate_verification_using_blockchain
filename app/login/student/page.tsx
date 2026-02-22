@@ -138,22 +138,22 @@ export default function StudentLoginPage() {
             </form>
 
             {/* Divider */}
-            <div className="relative">
+            {/* <div className="relative">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-border" />
               </div>
               <div className="relative flex justify-center text-xs uppercase">
                 <span className="px-2 bg-card text-muted-foreground">Or continue with</span>
               </div>
-            </div>
+            </div> */}
 
             {/* MetaMask Button */}
-            <Button variant="outline" className="w-full bg-transparent" disabled={isLoading}>
+            {/* <Button variant="outline" className="w-full bg-transparent" disabled={isLoading}>
               <svg className="h-4 w-4 mr-2" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M20.06 2L12 7.88 13.88 2h6.18zm-16.12 0l7.88 5.88L3.94 2h.24zM2 10l5.88 3.12L2 15.38v-5.38zm20 0v5.38L16.12 13.12 22 10zm-10 8.88L2 24h9v-6.12zM12 24l10-5.12-10-6.12v11.24zm-1-6.12L2 24h9v-6.12z" />
               </svg>
               Connect with MetaMask
-            </Button>
+            </Button> */}
 
             {/* Sign Up Link */}
             <div className="text-center text-sm">
@@ -168,9 +168,9 @@ export default function StudentLoginPage() {
         </Card>
 
         {/* Security Note */}
-        <p className="text-center text-xs text-muted-foreground mt-6">
+        {/* <p className="text-center text-xs text-muted-foreground mt-6">
           Your data is secured with blockchain technology and encrypted with industry-standard protocols.
-        </p>
+        </p> */}
       </div>
     </main>
   )
