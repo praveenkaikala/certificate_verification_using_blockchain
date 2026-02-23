@@ -99,8 +99,7 @@ const handleSearch = async () => {
     }
 
     // If exists on blockchain
-    setIsValidOnChain(true)
-
+    handleGetDetails()
   } catch (err) {
     console.error(err)
     setError("Verification failed. Please check network.")
@@ -123,9 +122,10 @@ const handleGetDetails = async () => {
     const data = res.data.data;
     console.log(data)
     setCertDetails(data)
+    setIsValidOnChain(true)
 
   } catch (err: any) {
-    setError(err.message)
+    setError("Certificate not found on blockchain ❌")
   } finally {
     setSearching(false)
   }

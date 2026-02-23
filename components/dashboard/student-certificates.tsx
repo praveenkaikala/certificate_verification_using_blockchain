@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Copy, CheckCircle, Award, Download, QrCode } from "lucide-react"
+import { Copy, CheckCircle, Award, Download, QrCode, Link } from "lucide-react"
 import { QRCodeCanvas } from "qrcode.react"
 import { pinata_gateway } from "@/utils/publicUrls"
 
@@ -23,7 +23,7 @@ export function StudentCertificates({ certificates }: Props) {
   const [copiedId, setCopiedId] = useState<string | null>(null)
   const [qrValue, setQrValue] = useState<string | null>(null)
   const [qrName, setQrName] = useState<string>("")
-
+  const [copiedLink,setCopiedLink]=useState<string | null> (null)
   /* =========================
      FORMAT DATE
   ========================== */
@@ -38,10 +38,13 @@ export function StudentCertificates({ certificates }: Props) {
   /* =========================
      COPY CERTIFICATE ID
   ========================== */
-  const copyToClipboard = (id: string) => {
+  const copyToClipboard = (id: string,link:boolean=false) => {
     navigator.clipboard.writeText(id)
     setCopiedId(id)
-    setTimeout(() => setCopiedId(null), 2000)
+    if(link) setCopiedLink(id)
+    setTimeout(() => {setCopiedId(null)
+      setCopiedLink(null)
+    }, 2000)
   }
 
   /* =========================
@@ -171,6 +174,21 @@ export function StudentCertificates({ certificates }: Props) {
                 >
                   <QrCode className="h-4 w-4" />
                   QR
+                </Button> 
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="flex-1 gap-2"
+                  onClick={() => copyToClipboard(`${window.location.origin}/verify/${cert._id}`,true)}
+                >
+                 {copiedLink !=null && copiedLink.split("/").at(-1) ==cert._id ? (
+                      <CheckCircle className="h-4 w-4 text-green-500" />
+                    ) : (
+                      <>
+                      <Copy className="h-4 w-4" />
+                      Link
+                      </>
+                    )}
                 </Button>
 
                 <Button
