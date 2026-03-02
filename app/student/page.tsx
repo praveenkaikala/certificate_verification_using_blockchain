@@ -5,6 +5,7 @@ import { StudentCertificates } from "@/components/dashboard/student-certificates
 import axiosApi from "@/utils/axios"
 import { endPoints } from "@/utils/publicUrls"
 import { useEffect, useState } from "react"
+import LogoutButton from "@/utils/logout"
 
 export default function StudentPage() {
   const [certificates,setCertificates]=useState([]);
@@ -36,9 +37,13 @@ export default function StudentPage() {
     <main className="min-h-screen bg-background">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
-        <div className="mb-8">
+        <div className="flex justify-between items-center">
+          <div className="mb-8">
+
           <h1 className="text-3xl font-bold text-foreground mb-2">My Certificates</h1>
           <p className="text-muted-foreground">View and manage your blockchain-verified credentials</p>
+          </div>
+          <LogoutButton/>
         </div>
 
         {/* Student Info Card */}

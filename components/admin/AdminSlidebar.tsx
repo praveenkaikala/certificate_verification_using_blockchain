@@ -12,6 +12,7 @@ import {
   LogOut,
 } from "lucide-react";
 import clsx from "clsx";
+import LogoutButton from "@/utils/logout";
 
 interface SidebarItem {
   label: string;
@@ -79,12 +80,7 @@ const AdminSidebar = () => {
 
       {/* Footer */}
       <div className="border-t px-3 py-4">
-        <button
-          className="flex items-center gap-3 w-full px-3 py-2 text-sm font-medium rounded-md text-destructive hover:bg-destructive/10 transition-colors"
-        >
-          <LogOut className="h-5 w-5" />
-          Logout
-        </button>
+       <LogoutButton/>
       </div>
     </aside>
   );

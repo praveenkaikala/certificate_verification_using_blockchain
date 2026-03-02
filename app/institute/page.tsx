@@ -38,10 +38,10 @@ const getStats=async()=>{
             <h1 className="text-3xl font-bold text-foreground mb-2">Institute Dashboard</h1>
             <p className="text-muted-foreground">Manage and issue blockchain certificates</p>
           </div>
-          <Button onClick={() => setShowIssueModal(true)} className="gap-2 bg-primary hover:bg-primary/90" size="lg">
+          {/* <Button onClick={() => setShowIssueModal(true)} className="gap-2 bg-primary hover:bg-primary/90" size="lg">
             <Plus className="h-5 w-5" />
             Issue Certificate
-          </Button>
+          </Button> */}
         </div>
 
         {/* Stats Overview */}
@@ -88,8 +88,8 @@ const getStats=async()=>{
         <InstituteDashboard />
       </div>
 
-      {/* Issue Modal */}
-      {showIssueModal && <IssueModal onClose={() => setShowIssueModal(false)} />}
+      {/* Issue Modal
+      {showIssueModal && <IssueModal onClose={() => setShowIssueModal(false)} />} */}
     </main>
   )
 }

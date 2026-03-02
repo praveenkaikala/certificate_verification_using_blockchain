@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import axiosApi from "@/utils/axios";
 import { CONTRACT, endPoints } from "@/utils/publicUrls";
+import toast from "react-hot-toast";
 
 const CONTRACT_ADDRESS =CONTRACT
 
@@ -87,16 +88,16 @@ const Page = () => {
           }
       });
 
-      alert("Certificate issued successfully 🎉");
+      toast.success("Certificate issued successfully 🎉");
 
       setForm({
         studentRegNo: "",
         course: "",
       });
       setCertificateFile(null);
-    } catch (error) {
-      console.error(error);
-      alert("Failed to issue certificate");
+    } catch (error:any) {
+      console.log(error);
+      toast.error(error?.response?.data?.message ||"Failed to issue certificate");
     } finally {
       setLoading(false);
     }
@@ -127,7 +128,7 @@ const Page = () => {
       //   certificateId: data.cid,
       // }));
 
-      alert("File uploaded to IPFS successfully ✅");
+      toast.success("File uploaded to IPFS successfully ✅");
     } catch (err) {
       console.error(err);
       alert("Upload failed");

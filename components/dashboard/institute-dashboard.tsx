@@ -92,7 +92,16 @@ const handleDelete = async () => {
     })
 
     setCertificates((prev) =>
-      prev.filter((cert) => cert._id !== selectedId)
+      prev.map((cert) => {
+        if(cert._id==selectedId)
+        {
+          return {
+            ...cert,
+            valid:false
+          }
+        }
+        return {...cert}
+      })
     )
 
     toast.success("Deleted successfully")
