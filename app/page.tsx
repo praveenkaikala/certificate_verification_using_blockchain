@@ -8,34 +8,33 @@ export default function HomePage() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-background via-background to-muted/30 pt-20 pb-32 md:pt-32 md:pb-48">
+      <section className="relative overflow-hidden bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 pt-20 pb-32 md:pt-32 md:pb-48">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center text-center gap-8">
             <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-1000">
               <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-balance">
-                Verify Skills Instantly with{" "}
+                Verify Certificates Instantly with{" "}
                 <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                   Blockchain
                 </span>
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto text-balance">
-                ForgeryShield allows verified institutions to issue skill and academic certificates as NFTs on the
-                blockchain, instantly verifiable by employers worldwide.
+                ForgeryShield enables verified institutions to issue tamper-proof digital certificates secured on the blockchain, allowing employers and organizations worldwide to instantly verify their authenticity.
               </p>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200">
-              <Link href="/login/institute">
+              <Link href="/verify">
                 <Button size="lg" className="gap-2 bg-primary hover:bg-primary/90">
-                  Issue Certificate
+                  Verify Certificate
                   <ArrowRight className="h-4 w-4" />
                 </Button>
               </Link>
-              <Link href="/verify">
+              {/* <Link href="/verify">
                 <Button size="lg" variant="outline">
                   Verify Certificate
                 </Button>
-              </Link>
+              </Link> */}
             </div>
           </div>
         </div>
@@ -86,13 +85,13 @@ export default function HomePage() {
             verification.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/issue">
+            <Link href="/register/institute">
               <Button size="lg" className="gap-2">
                 For Institutions
                 <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>
-            <Link href="/student">
+            <Link href="/register/student">
               <Button size="lg" variant="outline">
                 For Students
               </Button>
@@ -103,91 +102,129 @@ export default function HomePage() {
 
       {/* Footer */}
       <footer className="bg-background border-t border-border">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <h4 className="font-bold mb-4">ForgeryShield</h4>
-              <p className="text-sm text-muted-foreground">
-                Blockchain-powered credential verification for the modern world.
-              </p>
-            </div>
-            <div>
-              <h5 className="font-semibold mb-3 text-sm">Product</h5>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>
-                  <Link href="/issue" className="hover:text-foreground">
-                    Issue Certificates
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/verify" className="hover:text-foreground">
-                    Verify
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/student" className="hover:text-foreground">
-                    Student Dashboard
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h5 className="font-semibold mb-3 text-sm">Company</h5>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>
-                  <a href="#" className="hover:text-foreground">
-                    About
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-foreground">
-                    Blog
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-foreground">
-                    Careers
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h5 className="font-semibold mb-3 text-sm">Legal</h5>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>
-                  <a href="#" className="hover:text-foreground">
-                    Privacy
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-foreground">
-                    Terms
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-foreground">
-                    Contact
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-sm text-muted-foreground">&copy; 2025 ForgeryShield. All rights reserved.</p>
-            <div className="flex gap-6 mt-4 md:mt-0">
-              <a href="#" className="text-sm text-muted-foreground hover:text-foreground">
-                Twitter
-              </a>
-              <a href="#" className="text-sm text-muted-foreground hover:text-foreground">
-                LinkedIn
-              </a>
-              <a href="#" className="text-sm text-muted-foreground hover:text-foreground">
-                Discord
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
+  <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    {/* Top Section */}
+    <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-10">
+
+      {/* Brand */}
+      <div className="max-w-sm">
+        <h3 className="text-lg font-semibold">ForgeryShield</h3>
+        <p className="text-sm text-muted-foreground mt-2">
+          Secure and tamper-proof academic certificate verification powered by blockchain technology.
+        </p>
+      </div>
+
+      {/* Team Button */}
+      <div className="flex items-center gap-4">
+        <p className="text-sm text-muted-foreground">
+          Meet the people behind the project
+        </p>
+
+        <Link
+          href="/team"
+          className="px-4 py-2 rounded-md bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition"
+        >
+          Our Team
+        </Link>
+      </div>
+
+    </div>
+
+    {/* Bottom Section */}
+    <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center">
+
+      <p className="text-sm text-muted-foreground">
+        © {new Date().getFullYear()} ForgeryShield. All rights reserved.
+      </p>
+
+      <div className="flex gap-6 mt-4 md:mt-0">
+        <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition">
+          Twitter
+        </a>
+        <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition">
+          LinkedIn
+        </a>
+        <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition">
+          Discord
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+</footer>x
     </main>
   )
 }
+
+
+
+// <div className="grid md:grid-cols-4 gap-8 mb-8">
+//             <div>
+//               <h4 className="font-bold mb-4">ForgeryShield</h4>
+//               <p className="text-sm text-muted-foreground">
+//                 Blockchain-powered credential verification for the modern world.
+//               </p>
+//             </div>
+//             <div>
+//               <h5 className="font-semibold mb-3 text-sm">Product</h5>
+//               <ul className="space-y-2 text-sm text-muted-foreground">
+//                 {/* <li>
+//                   <Link href="/issue" className="hover:text-foreground">
+//                     Issue Certificates
+//                   </Link>
+//                 </li> */}
+//                 <li>
+//                   <Link href="/verify" className="hover:text-foreground">
+//                     Verify
+//                   </Link>
+//                 </li>
+//                 <li>
+//                   <Link href="/student" className="hover:text-foreground">
+//                     Student Dashboard
+//                   </Link>
+//                 </li>
+//               </ul>
+//             </div>
+//             <div>
+//               <h5 className="font-semibold mb-3 text-sm">Company</h5>
+//               <ul className="space-y-2 text-sm text-muted-foreground">
+//                 <li>
+//                   <a href="#" className="hover:text-foreground">
+//                     About
+//                   </a>
+//                 </li>
+//                 <li>
+//                   <a href="#" className="hover:text-foreground">
+//                     Blog
+//                   </a>
+//                 </li>
+//                 <li>
+//                   <a href="#" className="hover:text-foreground">
+//                     Careers
+//                   </a>
+//                 </li>
+//               </ul>
+//             </div>
+//             <div>
+//               <h5 className="font-semibold mb-3 text-sm">Legal</h5>
+//               <ul className="space-y-2 text-sm text-muted-foreground">
+//                 <li>
+//                   <a href="#" className="hover:text-foreground">
+//                     Privacy
+//                   </a>
+//                 </li>
+//                 <li>
+//                   <a href="#" className="hover:text-foreground">
+//                     Terms
+//                   </a>
+//                 </li>
+//                 <li>
+//                   <a href="#" className="hover:text-foreground">
+//                     Contact
+//                   </a>
+//                 </li>
+//               </ul>
+//             </div>
+//           </div>

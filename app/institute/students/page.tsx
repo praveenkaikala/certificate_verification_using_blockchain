@@ -16,7 +16,7 @@ type Student = {
   name: string
   email: string
   // course: string
-  verificationStatus:boolean
+  valid:boolean
 }
 
 const Page = () => {
@@ -94,12 +94,12 @@ const Page = () => {
       cell: (row: Student) => (
         <span
           className={`px-2 py-1 rounded text-xs font-medium capitalize ${
-            row.verificationStatus 
+            row.valid 
               ? "bg-green-100 text-green-700"
               : "bg-red-100 text-red-700"
           }`}
         >
-          {row.verificationStatus ? "Active" : "InActive"}
+          {row.valid ? "Active" : "InActive"}
         </span>
       ),
     },
@@ -121,12 +121,12 @@ const Page = () => {
               setModalOpen(true)
             }}
             className={
-              row.verificationStatus
+              row.valid
                 ? "text-red-600"
                 : "text-green-600"
             }
           >
-            {row.verificationStatus ? "Block" :"UnBlock"}
+            {row.valid ? "Block" :"UnBlock"}
           </Button>
         </div>
       ),
@@ -154,12 +154,12 @@ const Page = () => {
       <ConfirmModal
         open={modalOpen}
         title={
-          selectedStudent?.verificationStatus
+          selectedStudent?.valid
             ? "Block Student"
             : "Unblock Student"
         }
         description={`Are you sure you want to ${
-          selectedStudent?.verificationStatus
+          selectedStudent?.valid
             ? "block"
             : "unblock"
         } this student?`}

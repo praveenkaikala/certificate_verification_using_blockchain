@@ -15,7 +15,7 @@ type Student = {
   reg_no: string
   name: string
   email: string
-  verificationStatus: boolean
+  valid: boolean
 }
 
 const Page = () => {
@@ -84,17 +84,17 @@ const Page = () => {
       header: "Email",
     },
     {
-      key: "verificationStatus",
+      key: "valid",
       header: "Verification Status",
       cell: (row: Student) => (
         <span
           className={`px-2 py-1 rounded text-xs font-medium ${
-            row.verificationStatus
+            row.valid
               ? "bg-green-100 text-green-700"
               : "bg-yellow-100 text-yellow-700"
           }`}
         >
-          {row.verificationStatus ? "Verified" : "Pending"}
+          {row.valid ? "Verified" : "Pending"}
         </span>
       ),
     },
@@ -102,7 +102,7 @@ const Page = () => {
       key: "action",
       header: "Action",
       cell: (row: Student) =>
-        row.verificationStatus ? (
+        row.valid ? (
           <span className="text-sm text-muted-foreground">—</span>
         ) : (
           <Button
