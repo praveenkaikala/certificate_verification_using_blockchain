@@ -25,25 +25,25 @@ const students = [
     name: "Ravi Kiran Valavala",
     role: "Backend Developer",
     designation: "Student",
-    image: "vvk.jpeg",
-    github: "https://www.linkedin.com/in/praveenkaikala",
-    linkedin: "https://www.linkedin.com/in/praveenkaikala",
+    image: "vvr.jpeg",
+    github: "https://github.com/ravikiranvalavala",
+    linkedin: "#",
   },
   {
     name: "Hrishith Varma Vetukuri",
     role: "Frontend Developer",
     designation: "Student",
     image: "hrisith.jpeg",
-    github: "#",
-    linkedin: "https://www.linkedin.com/in/praveenkaikala",
+    github: "https://github.com/hrishithvarmavetukuri-dotcom",
+    linkedin: "#",
   },
   {
     name: "Madhavan Mane",
     role: "UI & UX",
     designation: "Student",
     image: "mady.jpeg",
-    github: "#",
-    linkedin: "https://www.linkedin.com/in/praveenkaikala",
+    github: "https://github.com/MadhavanMane7",
+    linkedin: "#",
   },
 ]
 
@@ -107,13 +107,15 @@ export default function TeamPage() {
               >
      <div>
 
-                <Image
-                  src={student.image}
-                  alt={student.name}
-                  width={100}
-                  height={100}
-                  className="rounded-full mx-auto mb-4 object-cover"
-                />
+               <div className="w-30 h-30 mx-auto mb-4 relative">
+  <Image
+    src={student.image}
+    alt={student.name}
+    fill
+    className="rounded-full object-cover"
+  />
+</div>
+
 
                 <h3 className="font-semibold">{student.name}</h3>
 
