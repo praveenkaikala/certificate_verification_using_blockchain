@@ -12,6 +12,7 @@ interface Certificate {
   courseName: string
   issueDate: string
   transactionHash: string
+  ipfsHash:string
   valid: boolean
 }
 
@@ -50,33 +51,27 @@ export function StudentCertificates({ certificates }: Props) {
   /* =========================
      DOWNLOAD FROM IPFS
   ========================== */
-  const downloadFromIPFS = async (
-    hash: string,
-    courseName: string
-  ) => {
-    try {
+ const downloadFromIPFS = async (hash: string, courseName: string ) => { 
+    try{ 
       const url = `${pinata_gateway}${hash}`
-      const response = await fetch(url)
-      const blob = await response.blob()
+       const response = await fetch(url) 
+       const blob = await response.blob()
+        const contentType = blob.type
+         const extension = contentType ? contentType.split("/")[1] : "pdf"
+          const safeName = courseName.replace(/\s+/g, "-") 
+          const link = document.createElement("a")
+           link.href = window.URL.createObjectURL(blob) 
+           link.download =`${safeName}.${extension}`
+            document.body.appendChild(link)
+             link.click()
+              document.body.removeChild(link)
+             } 
+             catch (error) 
+             {
+               console.error("Download failed", error)
+               } 
+              }
 
-      const contentType = blob.type
-      const extension = contentType
-        ? contentType.split("/")[1]
-        : "pdf"
-
-      const safeName = courseName.replace(/\s+/g, "-")
-
-      const link = document.createElement("a")
-      link.href = window.URL.createObjectURL(blob)
-      link.download = `${safeName}.${extension}`
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
-
-    } catch (error) {
-      console.error("Download failed", error)
-    }
-  }
 
   /* =========================
      DOWNLOAD QR
@@ -175,21 +170,29 @@ export function StudentCertificates({ certificates }: Props) {
                   <QrCode className="h-4 w-4" />
                   QR
                 </Button> 
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="flex-1 gap-2"
-                  onClick={() => copyToClipboard(`${window.location.origin}/verify/${cert._id}`,true)}
-                >
-                 {copiedLink !=null && copiedLink.split("/").at(-1) ==cert._id ? (
-                      <CheckCircle className="h-4 w-4 text-green-500" />
-                    ) : (
-                      <>
-                      <Copy className="h-4 w-4" />
-                      Link
-                      </>
-                    )}
-                </Button>
+              <Button
+  variant="outline"
+  size="sm"
+  className="flex-1 gap-2"
+  onClick={() =>
+    copyToClipboard(
+      `${window.location.origin}/verify/${btoa(cert._id)}`,
+      true
+    )
+  }
+>
+  {copiedLink != null &&
+  atob(copiedLink.split("/").at(-1) || "") === cert._id ? (
+    <CheckCircle className="h-4 w-4 text-green-500" />
+  ) : (
+    <>
+      <Copy className="h-4 w-4" />
+      Link
+    </>
+  )}
+</Button>
+
+
 
                 <Button
                   variant="outline"
@@ -197,7 +200,7 @@ export function StudentCertificates({ certificates }: Props) {
                   className="flex-1 gap-2"
                   onClick={() =>
                     downloadFromIPFS(
-                      cert.transactionHash,
+                      cert.ipfsHash,
                       cert.courseName
                     )
                   }

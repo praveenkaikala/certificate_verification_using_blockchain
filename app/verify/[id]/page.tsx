@@ -23,7 +23,7 @@ const CONTRACT_ABI = ["function isVerified(string) view returns (bool)"]
 
 export default function CertificateVerifier() {
   const params = useParams()
-  const certificateId = params.id as string
+  const certificateId = atob(params.id as string)
 
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState("")
