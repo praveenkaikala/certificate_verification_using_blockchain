@@ -10,14 +10,6 @@ import axiosApi from "@/utils/axios";
 import { CONTRACT, endPoints } from "@/utils/publicUrls";
 import toast from "react-hot-toast";
 
-const CONTRACT_ADDRESS =CONTRACT
-
-const CONTRACT_ABI = [
-  "function generateCertificate(string,string,string,string,string)",
-  "function getCertificate(string) view returns (string,string,string,string)",
-  "function isVerified(string) view returns (bool)"
-];
-
 
 const Page = () => {
   const [form, setForm] = useState({
@@ -53,40 +45,7 @@ const Page = () => {
           ...endPoints.institute.certificates.issue,
           data:formData
       });
-      // console.log(initRes)
-      const { id,studentId, ipfsHash,instituteId} = initRes?.data?.data
-      // console.log(studentId, ipfsHash,instituteId)
-      /* =========================
-         2️⃣ METAMASK + BLOCKCHAIN
-      ========================== */
-      if (!(window as any).ethereum) {
-        alert("MetaMask not installed");
-        return;
-      }
-
-      const provider = new ethers.BrowserProvider((window as any).ethereum);
-      await provider.send("eth_requestAccounts", []);
-      const signer = await provider.getSigner();
-      console.log(3)
-      const contract = new ethers.Contract(
-        CONTRACT_ADDRESS,
-        CONTRACT_ABI,
-        signer,
-      );
-
-      const tx = await contract.generateCertificate(id,studentId,form.course,instituteId,ipfsHash);
-      const receipt = await tx.wait();
-      console.log(receipt.blockHash)
-      /* =========================
-         3️⃣ FINAL BACKEND CONFIRM
-      ========================== */
-       const resp = await axiosApi({
-          ...endPoints.institute.certificates.putIssue,
-          data:{
-            id,
-            tranxId:receipt.blockHash
-          }
-      });
+    
 
       toast.success("Certificate issued successfully 🎉");
 
