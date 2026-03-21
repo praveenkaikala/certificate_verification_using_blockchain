@@ -13,15 +13,6 @@ import { Search, CheckCircle, AlertCircle, Loader, Copy, Download, Award, Eye } 
 import axiosApi from "@/utils/axios"
 import { CONTRACT, endPoints } from "@/utils/publicUrls"
 
-const CONTRACT_ADDRESS =CONTRACT
-
-const CONTRACT_ABI = [
-  "function generateCertificate(string,string,string,string,string)",
-  "function getCertificate(string) view returns (string,string,string,string)",
-  "function isVerified(string) view returns (bool)"
-];
-
-
 export function CertificateVerifier() {
   const [searchInput, setSearchInput] = useState("")
   const [searching, setSearching] = useState(false)
@@ -82,23 +73,6 @@ const handleSearch = async () => {
     setVerified(null)
     setIsValidOnChain(false)
     setCertDetails(null)
-
-    const provider = new ethers.JsonRpcProvider("http://127.0.0.1:7545")
-
-    const contract = new ethers.Contract(
-      CONTRACT_ADDRESS,
-      CONTRACT_ABI,
-      provider
-    )
-
-    const exists = await contract.isVerified(searchInput)
-
-    if (!exists) {
-      setError("Certificate not found on blockchain ❌")
-      return
-    }
-
-    // If exists on blockchain
     handleGetDetails()
   } catch (err) {
     console.error(err)

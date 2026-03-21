@@ -17,10 +17,6 @@ import {
 import axiosApi from "@/utils/axios"
 import { CONTRACT, endPoints } from "@/utils/publicUrls"
 
-const CONTRACT_ADDRESS = CONTRACT
-
-const CONTRACT_ABI = ["function isVerified(string) view returns (bool)"]
-
 export default function CertificateVerifier() {
   const params = useParams()
   const certificateId = atob(params.id as string)
@@ -32,23 +28,6 @@ export default function CertificateVerifier() {
 
   const verifyCertificate = async () => {
     try {
-      setLoading(true)
-      setError("")
-
-      const provider = new ethers.JsonRpcProvider("http://127.0.0.1:7545")
-
-      const contract = new ethers.Contract(
-        CONTRACT_ADDRESS,
-        CONTRACT_ABI,
-        provider
-      )
-
-      const exists = await contract.isVerified(certificateId)
-
-      if (!exists) {
-        setError("Certificate not found on blockchain ❌")
-        return
-      }
 
       fetchDetails()
       
