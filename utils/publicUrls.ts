@@ -1,4 +1,4 @@
-export const backend_url:string="http://localhost:5000/api/v1/"
+export const backend_url:string="https://doria-multiovular-cayla.ngrok-free.dev/api/v1/"
 export const pinata_gateway:string ="http://scarlet-impossible-squirrel-929.mypinata.cloud/ipfs/"
 export const CONTRACT="0x5f9af9856E4b7Dd1EeCEF08CD5520eaB58b938eB"
 type HttpMethod = "get" | "post" | "put" | "delete";
