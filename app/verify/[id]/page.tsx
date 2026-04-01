@@ -185,13 +185,13 @@ export default function CertificateVerifier() {
 
               {/* Blockchain Details */}
               <div className="border-t pt-6">
-                <h3 className="text-sm font-semibold text-muted-foreground uppercase mb-4">
+                {/* <h3 className="text-sm font-semibold text-muted-foreground uppercase mb-4">
                   Blockchain Details
-                </h3>
+                </h3> */}
 
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="grid md:grid-cols-1 gap-4">
 
-                  <div className="bg-background p-4 rounded-lg border">
+                  {/* <div className="bg-background p-4 rounded-lg border">
                     <p className="text-xs text-muted-foreground">
                       Transaction Hash
                     </p>
@@ -213,7 +213,7 @@ export default function CertificateVerifier() {
                         <Copy className="h-4 w-4" />
                       </Button>
                     </div>
-                  </div>
+                  </div> */}
 
                   <div className="bg-background p-4 rounded-lg border">
                     <p className="text-xs text-muted-foreground">

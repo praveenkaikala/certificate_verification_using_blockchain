@@ -277,13 +277,13 @@ const handleGetDetails = async () => {
 
       {/* Blockchain Info */}
       <div className="border-t border-border pt-6">
-        <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-4">
+        {/* <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-4">
           Blockchain Details
-        </p>
+        </p> */}
 
-        <div className="grid md:grid-cols-2 gap-4">
+        <div className="grid md:grid-cols-1 gap-4">
 
-          <div className="bg-background/50 p-4 rounded-lg">
+          {/* <div className="bg-background/50 p-4 rounded-lg">
             <p className="text-xs text-muted-foreground mb-1">Transaction Hash</p>
             <div className="flex items-center gap-2">
               <code className="text-xs break-all font-mono text-foreground">
@@ -299,7 +299,7 @@ const handleGetDetails = async () => {
                 <Copy className="h-4 w-4" />
               </Button>
             </div>
-          </div>
+          </div> */}
 
           <div className="bg-background/50 p-4 rounded-lg">
             <p className="text-xs text-muted-foreground mb-1">Issue Date</p>

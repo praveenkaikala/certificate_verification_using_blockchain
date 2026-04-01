@@ -124,7 +124,7 @@ const handleDelete = async () => {
 
   const columns = [
     {
-      key: "certificateId",
+      key: "_id",
       header: "Certificate ID",
       cell: (row: Certificate) =>
       (
@@ -173,20 +173,20 @@ const handleDelete = async () => {
         </span>
       ),
     },
-    {
-      key: "transactionHash",
-      header: "Blockchain ID",
-      cell: (row: Certificate) => (
-       <span
-  title={row.transactionHash}
-  className="font-mono text-xs text-muted-foreground"
->
-  {row.transactionHash
-    ? `${row.transactionHash.slice(0, 6)}...${row.transactionHash.slice(-4)}`
-    : "-"}
-</span>
-      ),
-    },
+//     {
+//       key: "transactionHash",
+//       header: "Blockchain ID",
+//       cell: (row: Certificate) => (
+//        <span
+//   title={row.transactionHash}
+//   className="font-mono text-xs text-muted-foreground"
+// >
+//   {row.transactionHash
+//     ? `${row.transactionHash.slice(0, 6)}...${row.transactionHash.slice(-4)}`
+//     : "-"}
+// </span>
+//       ),
+//     },
     {
       key: "actions",
       header: "Actions",
